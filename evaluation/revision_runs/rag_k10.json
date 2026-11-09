@@ -1,0 +1,882 @@
+{
+  "configuration": "rag_k10",
+  "model": "gemma3:4b",
+  "retrieval_k": 10,
+  "prompt_condition": "rag",
+  "metrics": {
+    "total_questions": 10,
+    "answerable_questions": 5,
+    "unanswerable_questions": 5,
+    "answer_accuracy_pct": 80.0,
+    "refusal_accuracy_pct": 80.0,
+    "non_refusal_rate_on_evidence_unanswerable_pct": 20.0,
+    "context_supported_response_pct_among_judged": 60.0,
+    "context_support_judged_n": 10,
+    "mean_retrieval_seconds": 0.0821,
+    "mean_generation_seconds": 75.6998,
+    "mean_context_characters": 5438.7
+  },
+  "results": [
+    {
+      "id": 1,
+      "question": "What is Retrieval-Augmented Generation?",
+      "type": "answerable",
+      "expected": "RAG is a hybrid approach that combines retrieval-based methods with generative language models by retrieving relevant information from an external knowledge source.",
+      "answer": "Retrieval-Augmented Generation (RAG) is a hybrid approach that integrates the advantages of retrieval-based and generative models to enhance the factual accuracy of language model outputs. It functions by retrieving relevant documents from a large corpus and utilizing this information to guide the generation process.",
+      "is_refusal": false,
+      "correctness": "CORRECT",
+      "context_support": "SUPPORTED",
+      "retrieval_k": 10,
+      "retrieval_seconds": 0.115649,
+      "generation_seconds": 68.337514,
+      "context_characters": 5873,
+      "retrieved_chunks": [
+        {
+          "chunk_id": 1049,
+          "source": "RAG-8.pdf",
+          "page": 1,
+          "score": 0.5947682857513428,
+          "text": "Accelerating Retrieval-Augmented Generation Derrick Quinn Cornell University Ithaca, NY, USA Mohammad Nouri Cornell University Ithaca, NY, USA Neel Patel Cornell University Ithaca, NY, USA John Salihu University of Kansas Lawrence, KS, USA Alireza Salemi University of Massachusetts Amherst Amherst, MA, USA Sukhan Lee Samsung Electronics Hwasung, Republic of Korea Hamed Zamani University of Massachusetts Amherst Amherst, MA, USA Mohammad Alian Cornell University Ithaca, NY, USA Abstract An evolving solution to address hallucination and enhance accuracyinlargelanguagemodels(LLMs)isRetrieval-Augmented Generation (RAG)"
+        },
+        {
+          "chunk_id": 1264,
+          "source": "RAG-9.pdf",
+          "page": 3,
+          "score": 0.667060375213623,
+          "text": ". . . , oT} thus enhancing its reliability in tasks demanding high factual accuracy. 3.2. Retrieval-Augmented Generation (RAG) Retrieval-Augmented Generation (RAG) is a hybrid approach that integrates the advantages of retrieval-based and generative models to enhance the factual accuracy of language model out- puts. RAG functions by initially retrieving relevant documents D = {d1, d2, . . . , dk} from a large corpus C based on the input query q, and subsequently utilizing this retrieved information to guide the generation process G. The retrieved documents serve as a contextual and factual foundation, which assists the model in generating more accurate and contextually relevant re- sponses"
+        },
+        {
+          "chunk_id": 1059,
+          "source": "RAG-8.pdf",
+          "page": 2,
+          "score": 0.6763589978218079,
+          "text": ". Retrieval-Augmented Generation (RAG) is the term that is usedtorefertosystemsthatadoptthisapproachinthecontext of LLMs. A RAG application includes two key components: a re- trieval model and an LLM for text generation, called the gen- erative model. When a query is received, the retrieval model searches for relevant items (e.g., documents) and the top re- trieved items, together with the input, are sent to the genera- tive model. Current state-of-the-art retrieval approaches use bi-encoder neural networks (called dense retrieval)   for learning optimal embedding for queries and documents"
+        },
+        {
+          "chunk_id": 63,
+          "source": "RAG-1.pdf",
+          "page": 9,
+          "score": 0.6894277334213257,
+          "text": ".   Jeong, M., Sohn, J., Sung, M., & Kang, J. (2024). “Improving Medical Reasoning through Retrieval and Self-Reflection with Retrieval- Augmented Large Language Models,” arXiv preprint arXiv:2401.15269.   Xia, M., Zhang, X., Couturier, C., Zheng, G., Rajmohan, S., & Ruhle, V. (2023). “Hybrid retrieval-augmented generation for real-time composition assistance,” arXiv preprint arXiv:2308.04215.   Rackauckas, Z. (2024). “RAG-Fusion: A New Take on Retrieval-Augmented Generation,” arXiv preprint arXiv:2402.03367.   Shi, E., Wang, Y., Tao, W., Du, L., Zhang, H., Han, S., . & Sun, H. (2022). “RACE: Retrieval-Augmented Commit Message Generation,” arXiv preprint arXiv:2203.02700"
+        },
+        {
+          "chunk_id": 77,
+          "source": "RAG-10.pdf",
+          "page": 1,
+          "score": 0.7082701325416565,
+          "text": ", Tsinghua University, 3Beijing Normal University, 4Northeastern University, 5University of Chinese Academy of Sciences, 6ModelBest, 7University of Illinois Urbana-Champaign Abstract Retrieval-Augmented Generation (RAG) is a powerful approach that enables large language models (LLMs) to incorporate external knowl- edge"
+        },
+        {
+          "chunk_id": 247,
+          "source": "RAG-2.pdf",
+          "page": 1,
+          "score": 0.7138221263885498,
+          "text": ". Due to their powerful capacities, retrieval tech- niques have been successfully incorporated into advanced genera- tive models in the era of AI-Generated Content (AIGC)  . Notably, the integration of retrieval models with language mod- els has given rise to Retrieval-Augmented Generation (RAG)  , which has emerged as one of the most representative techniques 6491"
+        },
+        {
+          "chunk_id": 57,
+          "source": "RAG-1.pdf",
+          "page": 9,
+          "score": 0.742552638053894,
+          "text": ". (2020). “Retrieval-augmented generation for knowledge- intensive nlp tasks,” Advances in Neural Information Processing Systems 33: 9459-9474.   Li, H., Su, Y., Cai, D., Wang, Y., & Liu, L. (2022). “A survey on retrieval-augmented text generation,” arXiv preprint arXiv:2202.01110.   Mialon, G., Dessì, R., Lomeli, M., Nalmpantis, C., Pasunuru, R., Raileanu, R., . & Scialom, T. (2023). “Augmented language models: a survey,” arXiv preprint arXiv:2302.07842.   Zhao, R., Chen, H., Wang, W., Jiao, F., Do, X. L., Qin, C., . & Joty, S. (2023). “Retrieving multimodal information for augmented generation: A survey,” arXiv preprint arXiv:2303.10868.   Xiong, G., Jin, Q., Lu, Z., & Zhang, A. (2024)"
+        },
+        {
+          "chunk_id": 1287,
+          "source": "RAG-9.pdf",
+          "page": 5,
+          "score": 0.7434174418449402,
+          "text": ". Ad- dressing these limitations is crucial for enhancing the robust- ness and reliability of the model in diverse applications. 5. Discussion The experimental results indicate that integrating a weighted distribution of Retrieval-Augmented Generation (RAG) with the Llama Large model significantly enhances its performance, par- ticularly in terms of factual accuracy and contextual relevance. The improved precision, recall, and F1 scores suggest that the weighted RAG mechanism effectively prioritizes high-quality information during the generation process"
+        },
+        {
+          "chunk_id": 863,
+          "source": "RAG-6.pdf",
+          "page": 1,
+          "score": 0.747674822807312,
+          "text": "Proceedings of the 18th Conference of the European Chapter of the Association for Computational Linguistics System Demonstrations, pages 150–158 March 17-22, 2024 c⃝2024 Association for Computational Linguistics RAGAS: Automated Evaluation of Retrieval Augmented Generation Shahul Es†, Jithin James†, Luis Espinosa-Anke∗♢, Steven Schockaert∗ †Exploding Gradients ∗CardiffNLP, Cardiff University, United Kingdom ♢AMPLYFI, United Kingdom Abstract We introduce RAGAS1 (Retrieval Augmented Generation Assessment), a framework for reference-free evaluation of Retrieval Aug- mented Generation (RAG) pipelines. RAG sys- tems are composed of a retrieval module and an LLM based generation module"
+        },
+        {
+          "chunk_id": 1256,
+          "source": "RAG-9.pdf",
+          "page": 2,
+          "score": 0.7492819428443909,
+          "text": ". The collective goal of those efforts was to enhance the factual reli- ability of LLMs, reducing the incidence of hallucinations and improving their applicability in critical domains. 2.2. Retrieval-Augmented Generation (RAG) Retrieval-Augmented Generation (RAG) is as a powerful technique for enhancing the factual accuracy of language mod- els by combining retrieval-based and generative approaches  . RAG operated by retrieving relevant documents from a large corpus and incorporating this information into the gener- ation process, thereby grounding the output in external knowl- edge and improving its accuracy and relevance"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "question": "What are the main components of a RAG pipeline?",
+      "type": "answerable",
+      "expected": "A RAG system consists of a retriever and a downstream language model. The retriever finds relevant passages and the language model uses them to generate a response.",
+      "answer": "Typically, a RAG system consists of a retriever and a downstream language model (LM). Given a user question, the retriever finds relevant passages from a corpus and the LM uses these passages to generate a response.",
+      "is_refusal": false,
+      "correctness": "CORRECT",
+      "context_support": "SUPPORTED",
+      "retrieval_k": 10,
+      "retrieval_seconds": 0.063814,
+      "generation_seconds": 62.425483,
+      "context_characters": 5948,
+      "retrieved_chunks": [
+        {
+          "chunk_id": 12,
+          "source": "RAG-1.pdf",
+          "page": 2,
+          "score": 0.9879604578018188,
+          "text": ". By highlighting the current state of RAG research and its potential future directions, this review aims to inspire further investigation and development in this exciting field. The paper’s structure is as follows: Section 2 presents the adopted research methodology for this survey. In Section 3, we provide an overview of RAG applications, followed by a detailed discussion in Section 4. The paper concludes in Section 5, summarizing the key findings and implications of the study. 2. Background The research method (see  2) employed in this paper involves a thorough review and analysis of research publications related to RAG"
+        },
+        {
+          "chunk_id": 5,
+          "source": "RAG-1.pdf",
+          "page": 1,
+          "score": 1.048933744430542,
+          "text": ". However, existing literature reviews tend to focus primarily on the technological advancements of RAG, overlooking a comprehensive exploration of its applications. This paper seeks to address this gap by providing a thorough review of RAG applications, encompassing both task-specific and discipline-specific studies, while also outlining potential avenues for future research. By shedding light on current RAG research and outlining future directions, this review aims to catalyze further exploration and development in this dynamic field, thereby contributing to ongoing digital transformation efforts. © 2024 The Authors"
+        },
+        {
+          "chunk_id": 11,
+          "source": "RAG-1.pdf",
+          "page": 2,
+          "score": 1.0557920932769775,
+          "text": ". (b) illustrates how RAG integration with the LLM handles queries that fall outside the scope of the LLM’s training data. While the field of RAG has seen substantial growth, several online surveys   have explored technological advancements in RAG. Although these surveys provide valuable insights and references, they offer only a limited overview of RAG applications. To address this gap, this paper aims to provide an exhaustive overview of RAG applications, including both task-specific and discipline-specific studies, as well as future directions"
+        },
+        {
+          "chunk_id": 13,
+          "source": "RAG-1.pdf",
+          "page": 2,
+          "score": 1.0919406414031982,
+          "text": ". 2. Background The research method (see  2) employed in this paper involves a thorough review and analysis of research publications related to RAG. The main objective is to identify and categorize its applications across various NLP tasks and disciplines. The paper begins by collecting research publications specific to RAG, focusing on their applications. Since the RAG with LLM domain is relatively new and emerging, with many studies available as pre-"
+        },
+        {
+          "chunk_id": 257,
+          "source": "RAG-2.pdf",
+          "page": 2,
+          "score": 1.1007846593856812,
+          "text": ". In Section 5, key challenges and potential directions for future exploration are further discussed. Due to the page limit, this published version omits a part content including background knowl- edge of LLMs, details of RA-LLM architectures, visual illustrations, etc. Please refer to the long version for more information  . Concurrent to our survey, several related surveys have diverse fo- cuses for RAG and LLMs. For example, Zhao et al.   specifically review multi-modal information-based RAG techniques and Zhao et al.   discuss the RAG for AIGC. Gao et al.   conduct a rela- tively comprehensive overview of RAG for LLMs"
+        },
+        {
+          "chunk_id": 932,
+          "source": "RAG-7.pdf",
+          "page": 1,
+          "score": 1.1008751392364502,
+          "text": ". Typically, a RAG system consists of a retriever and a downstream language model (LM). Given a user question, the retriever finds relevant passages from a corpus and the LM uses these passages to gener- ate a response. This formulation admits a multitude of choices: what retrieval model to use, how to di- vide the documents into retrieval chunks, and how to prompt or finetune the LM to use the retrieved information, to name only a few of the simplest design decisions. ∗Project started during research internship at Databricks The best design for a RAG system is not neces- sarily universal across data domains, corpus sizes, and cost/latency budgets"
+        },
+        {
+          "chunk_id": 935,
+          "source": "RAG-7.pdf",
+          "page": 1,
+          "score": 1.1218128204345703,
+          "text": ". To evaluate RAG systems rapidly and accu- rately, we propose ARES, the Automated RAG Evaluation System. ARES is the first automated RAG evaluation system to generate tailored LLM judges for each component of a RAG pipeline, lead- ing to substantial boosts in evaluation precision and accuracy compared to existing approaches like RA- GAS. Furthermore, unlike existing RAG evaluation systems, ARES provides confidence intervals for its scoring by leveraging prediction-powered in- ference (PPI; Angelopoulos et al. 2023)"
+        },
+        {
+          "chunk_id": 23,
+          "source": "RAG-1.pdf",
+          "page": 4,
+          "score": 1.1530179977416992,
+          "text": ". Moreover, it supports multicultural enterprise queries, e-commerce searches, and personalized dialogue systems. Furthermore, RAG facilitates event argument extraction, intelligence report generation, short-form QA, automated transactions, and private data handling. Lastly, it contributes to science QA, clinical writing, and pharmaceutical regulatory compliance inquiries. After compiling all the applications of RAG, the subsequent step involves categorizing them based on the specific nature of the NLP tasks they tackle (see Table 2 and  4)"
+        },
+        {
+          "chunk_id": 10,
+          "source": "RAG-1.pdf",
+          "page": 2,
+          "score": 1.1547422409057617,
+          "text": ". As an example, without RAG, the system lacks access to real-time or updated information. However, with RAG integration, leveraging external data sources such as news articles, the system can respond to current business events, presenting opportunities for business intelligence analysts. (a) (b)  1. (a) A generic RAG architecture, where users’ queries, potentially in different modalities (e.g., text, code, image, etc.), are inputted into both the retriever and the generator. The retriever scans for relevant data sources in storage, while the generator engages with the retrieval outcomes, ultimately generating results across various modalities  ;  1"
+        },
+        {
+          "chunk_id": 40,
+          "source": "RAG-1.pdf",
+          "page": 6,
+          "score": 1.1582798957824707,
+          "text": ". 3) Furthermore, the performance of RAG concerning the volume and variety of datasets has not been discussed. Deploying RAG with large datasets of varying structures (e.g., structured, semi-structured, or non-structured) may lead to processing delays, warranting further exploration before selecting a RAG with LLM integrated solution for organizational deployment. 4) Additionally, this survey did not cover the diverse range of RAG architectures and technologies available for integration with different LLMs. Future work should delve into these options to discuss how various RAG solutions can be adapted with LLMs for different NLP tasks and applications"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "question": "How does RAG improve the factual accuracy of language models?",
+      "type": "answerable",
+      "expected": "RAG improves factual accuracy by retrieving relevant information from external sources and using that information during generation.",
+      "answer": "By addressing these areas, researchers can further optimize the performance of weighted RAG models, ensuring their reliability and effectiveness in an ever-expanding array of applications. The weighted RAG mechanism in the Llama Large model received an average rating of 4.3 out of 5 for factual correctness and contextual relevance.",
+      "is_refusal": false,
+      "correctness": "INCORRECT",
+      "context_support": "SUPPORTED",
+      "retrieval_k": 10,
+      "retrieval_seconds": 0.051917,
+      "generation_seconds": 71.960432,
+      "context_characters": 6175,
+      "retrieved_chunks": [
+        {
+          "chunk_id": 1250,
+          "source": "RAG-9.pdf",
+          "page": 1,
+          "score": 0.5074449181556702,
+          "text": ". Uti- lizing this dataset enables a rigorous assessment of the improve- ments brought about by the weighted RAG integration, offering insights into its practical benefits and limitations. The major contributions of this article are: 1. Introducing a novel weighted distribution mechanism in RAG to enhance the factual accuracy of language models. 2. Demonstrating substantial improvements in precision, re- call, F1 score, and BLEU score through comprehensive experiments. 3. Providing a scalable framework that can be adapted to various language models and applications. 4. Highlighting the practical applicability of the enhanced model through human evaluations. 5"
+        },
+        {
+          "chunk_id": 1280,
+          "source": "RAG-9.pdf",
+          "page": 4,
+          "score": 0.6178104877471924,
+          "text": ". The BLEU score for the weighted RAG model was 42.5, compared to 36.8 for the baseline model, in- dicating improved fluency and relevance of the generated text. Human evaluations further confirmed these findings, with the weighted RAG model receiving an average rating of 4.3 out of 5 for factual correctness and contextual relevance, compared to 3.7 for the baseline model. These results underscored the effi- cacy of the weighted RAG mechanism in enhancing the factual accuracy and overall performance of the Llama Large model. 4.3. Error Analysis An analysis of the errors made by the model revealed sev- eral common patterns and limitations. The detailed error met- rics are presented in Table 3"
+        },
+        {
+          "chunk_id": 1298,
+          "source": "RAG-9.pdf",
+          "page": 6,
+          "score": 0.6343003511428833,
+          "text": ". By addressing these areas, researchers can further optimize the performance of weighted RAG models, ensuring their reliability and effec- tiveness in an ever-expanding array of applications. The pur- suit of more accurate and contextually aware language models will undoubtedly continue to shape the future of NLP, driving progress and innovation in this dynamic and rapidly evolving field. 6. Conclusion The research presented in this paper demonstrates signifi- cant advancements in enhancing the factual accuracy and con- textual relevance of the Llama Large language model through the integration of a weighted distribution of Retrieval-Augmented Generation (RAG)"
+        },
+        {
+          "chunk_id": 1295,
+          "source": "RAG-9.pdf",
+          "page": 6,
+          "score": 0.6413241624832153,
+          "text": ". Human assess- ments of factual correctness and contextual relevance provide valuable insights that complement numerical scores, offering a more comprehensive understanding of model performance. This dual evaluation approach ensures that the improvements achieved through the weighted RAG mechanism are not only statistically significant but also practically meaningful. Future research should continue to prioritize human-in-the-loop eval- uations, incorporating diverse perspectives and use cases to en- sure the broad applicability and reliability of language models"
+        },
+        {
+          "chunk_id": 865,
+          "source": "RAG-6.pdf",
+          "page": 1,
+          "score": 0.6672008037567139,
+          "text": ". With RAGAS, we put forward a suite of metrics which can be used to evaluate these different dimensions without having to rely on ground truth human annotations. We posit that such a framework can crucially contribute to faster evaluation cycles of RAG architectures, which is especially important given the fast adoption of LLMs. 1 Introduction Language Models (LMs) capture a vast amount of knowledge about the world, which allows them to answer questions without accessing any exter- nal sources"
+        },
+        {
+          "chunk_id": 82,
+          "source": "RAG-10.pdf",
+          "page": 1,
+          "score": 0.695279598236084,
+          "text": ". Although various benchmarks for measuring the capabilities of existing RAG systems have been proposed (Joshi et al., 2017; Nguyen et al., 2017; Kwiatkowski et al., 2019; Chen et al., 2024b; Lyu et al., 2024), they often lack sufficient coverage of diverse, domain-specific scenarios and fail to incorporate comprehensive metrics for assessing factual accuracy, which limits their applicability in real-world contexts that require precise and reliable information (Bruckhaus, 2024). Furthermore, the challenges of building scenario-specific evaluation datasets—such as dynamic real-world conditions, privacy concerns, and the need for expert annota- tion—further exacerbate the issue"
+        },
+        {
+          "chunk_id": 1276,
+          "source": "RAG-9.pdf",
+          "page": 4,
+          "score": 0.7286983132362366,
+          "text": ". This setup provides valuable insights into its prac- tical applications and potential for further development, show- casing the improvements in factual accuracy and contextual rel- evance achieved through the integration of the weighted RAG mechanism. 4. Results and Analysis 4.1. Evaluation Metrics The evaluation of the Llama Large model with the inte- grated weighted RAG mechanism employed a comprehensive set of metrics designed to measure factual accuracy and overall performance. Precision, recall, and F1 score were used to assess the accuracy of the model’s outputs"
+        },
+        {
+          "chunk_id": 1264,
+          "source": "RAG-9.pdf",
+          "page": 3,
+          "score": 0.7519350647926331,
+          "text": ". . . , oT} thus enhancing its reliability in tasks demanding high factual accuracy. 3.2. Retrieval-Augmented Generation (RAG) Retrieval-Augmented Generation (RAG) is a hybrid approach that integrates the advantages of retrieval-based and generative models to enhance the factual accuracy of language model out- puts. RAG functions by initially retrieving relevant documents D = {d1, d2, . . . , dk} from a large corpus C based on the input query q, and subsequently utilizing this retrieved information to guide the generation process G. The retrieved documents serve as a contextual and factual foundation, which assists the model in generating more accurate and contextually relevant re- sponses"
+        },
+        {
+          "chunk_id": 13,
+          "source": "RAG-1.pdf",
+          "page": 2,
+          "score": 0.752771258354187,
+          "text": ". 2. Background The research method (see  2) employed in this paper involves a thorough review and analysis of research publications related to RAG. The main objective is to identify and categorize its applications across various NLP tasks and disciplines. The paper begins by collecting research publications specific to RAG, focusing on their applications. Since the RAG with LLM domain is relatively new and emerging, with many studies available as pre-"
+        },
+        {
+          "chunk_id": 79,
+          "source": "RAG-10.pdf",
+          "page": 1,
+          "score": 0.7689501643180847,
+          "text": ". Experimental results show that RAGEval outperforms zero- shot and one-shot methods in terms of clarity, safety, conformity, and richness of generated samples. Furthermore, the use of LLMs for scoring the proposed metrics demonstrates a high level of consistency with human evalua- tions. RAGEval establishes a new paradigm for evaluating RAG systems in real-world appli- cations. The code and dataset are released at 1 Introduction Retrieval-Augmented Generation (RAG) systems are increasingly gaining attention (Gao et al., 2023; Asai et al., 2024) due to their ability to integrate external knowledge into large language models (LLMs)"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "question": "What was the average human evaluation rating for factual correctness and contextual relevance of the weighted RAG model?",
+      "type": "answerable",
+      "expected": "The weighted RAG model received an average rating of 4.3 out of 5, compared with 3.7 for the baseline model.",
+      "answer": "4.3/5",
+      "is_refusal": false,
+      "correctness": "CORRECT",
+      "context_support": "SUPPORTED",
+      "retrieval_k": 10,
+      "retrieval_seconds": 0.064722,
+      "generation_seconds": 50.433534,
+      "context_characters": 5531,
+      "retrieved_chunks": [
+        {
+          "chunk_id": 1278,
+          "source": "RAG-9.pdf",
+          "page": 4,
+          "score": 0.4118500351905823,
+          "text": ". Human evaluations were also conducted to as- sess the contextual appropriateness and factual correctness of the model’s outputs, providing a qualitative measure of perfor- mance that complemented the quantitative metrics. These metrics collectively provided a robust framework for evaluating the improvements in the model’s performance brought about by the weighted RAG mechanism. The combination of quantitative metrics and human evaluations offered a compre- hensive assessment of the model, ensuring that both the fac- tual accuracy and contextual relevance of the outputs were thor- oughly examined. 4.2"
+        },
+        {
+          "chunk_id": 1280,
+          "source": "RAG-9.pdf",
+          "page": 4,
+          "score": 0.5322550535202026,
+          "text": ". The BLEU score for the weighted RAG model was 42.5, compared to 36.8 for the baseline model, in- dicating improved fluency and relevance of the generated text. Human evaluations further confirmed these findings, with the weighted RAG model receiving an average rating of 4.3 out of 5 for factual correctness and contextual relevance, compared to 3.7 for the baseline model. These results underscored the effi- cacy of the weighted RAG mechanism in enhancing the factual accuracy and overall performance of the Llama Large model. 4.3. Error Analysis An analysis of the errors made by the model revealed sev- eral common patterns and limitations. The detailed error met- rics are presented in Table 3"
+        },
+        {
+          "chunk_id": 1295,
+          "source": "RAG-9.pdf",
+          "page": 6,
+          "score": 0.5607584714889526,
+          "text": ". Human assess- ments of factual correctness and contextual relevance provide valuable insights that complement numerical scores, offering a more comprehensive understanding of model performance. This dual evaluation approach ensures that the improvements achieved through the weighted RAG mechanism are not only statistically significant but also practically meaningful. Future research should continue to prioritize human-in-the-loop eval- uations, incorporating diverse perspectives and use cases to en- sure the broad applicability and reliability of language models"
+        },
+        {
+          "chunk_id": 1250,
+          "source": "RAG-9.pdf",
+          "page": 1,
+          "score": 0.6365017890930176,
+          "text": ". Uti- lizing this dataset enables a rigorous assessment of the improve- ments brought about by the weighted RAG integration, offering insights into its practical benefits and limitations. The major contributions of this article are: 1. Introducing a novel weighted distribution mechanism in RAG to enhance the factual accuracy of language models. 2. Demonstrating substantial improvements in precision, re- call, F1 score, and BLEU score through comprehensive experiments. 3. Providing a scalable framework that can be adapted to various language models and applications. 4. Highlighting the practical applicability of the enhanced model through human evaluations. 5"
+        },
+        {
+          "chunk_id": 1276,
+          "source": "RAG-9.pdf",
+          "page": 4,
+          "score": 0.6591107845306396,
+          "text": ". This setup provides valuable insights into its prac- tical applications and potential for further development, show- casing the improvements in factual accuracy and contextual rel- evance achieved through the integration of the weighted RAG mechanism. 4. Results and Analysis 4.1. Evaluation Metrics The evaluation of the Llama Large model with the inte- grated weighted RAG mechanism employed a comprehensive set of metrics designed to measure factual accuracy and overall performance. Precision, recall, and F1 score were used to assess the accuracy of the model’s outputs"
+        },
+        {
+          "chunk_id": 1283,
+          "source": "RAG-9.pdf",
+          "page": 5,
+          "score": 0.6648731231689453,
+          "text": "Table 2: Performance Metrics Comparison between Baseline and Weighted RAG Models Metric Baseline Weighted Model Precision (%) 82.6 89.3 Recall (%) 78.9 85.7 F1 Score (%) 80.7 87.5 BLEU Score 36.8 42.5 Human Evaluation 3.7/5 4.3/5 was the over-reliance on certain high-weight documents"
+        },
+        {
+          "chunk_id": 82,
+          "source": "RAG-10.pdf",
+          "page": 1,
+          "score": 0.7347619533538818,
+          "text": ". Although various benchmarks for measuring the capabilities of existing RAG systems have been proposed (Joshi et al., 2017; Nguyen et al., 2017; Kwiatkowski et al., 2019; Chen et al., 2024b; Lyu et al., 2024), they often lack sufficient coverage of diverse, domain-specific scenarios and fail to incorporate comprehensive metrics for assessing factual accuracy, which limits their applicability in real-world contexts that require precise and reliable information (Bruckhaus, 2024). Furthermore, the challenges of building scenario-specific evaluation datasets—such as dynamic real-world conditions, privacy concerns, and the need for expert annota- tion—further exacerbate the issue"
+        },
+        {
+          "chunk_id": 1034,
+          "source": "RAG-7.pdf",
+          "page": 15,
+          "score": 0.7512028217315674,
+          "text": ". We use the same experimental set-up as described in subsection 4.2. We find that below about 100-150 datapoints in the human preference validation set, ARES cannot meaningfully distinguish between the alternate RAG systems based on their accuracies in context relevance and answer relevance (C.R. and A.R., respectively)"
+        },
+        {
+          "chunk_id": 939,
+          "source": "RAG-7.pdf",
+          "page": 2,
+          "score": 0.7517116665840149,
+          "text": ". 2023) to improve model-based evaluation ac- curacy and provide statistical confidence intervals for RAG scoring. PPI utilizes a small set of human annotated datapoints for computing its confidence intervals; we designate this annotated set as our hu- man preference validation set, which is composed of approximately 150 annotated datapoints or more that designate both positive and negative examples for context relevance, answer faithfulness, and an- swer relevance"
+        },
+        {
+          "chunk_id": 956,
+          "source": "RAG-7.pdf",
+          "page": 4,
+          "score": 0.7662661075592041,
+          "text": ". By averaging the in- dividual predicted labels for each in-domain triple, we calculate the RAG system performance across each of the three metrics. In principle, we could simply report these aver- age scores as quality metrics for each RAG system. However, these scores reflect entirely unlabeled data with predictions from a synthetically-trained LLM judge, and hence they may not be entirely accurate. As an extreme alternative, we could use just the small human preference validation set dis- cussed previously for evaluation, reporting the ex- tent to which each RAG system agrees with (or deviates from) the human annotations"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "question": "What BLEU score did the weighted RAG model achieve compared with the baseline model?",
+      "type": "answerable",
+      "expected": "The weighted RAG model achieved a BLEU score of 42.5 compared with 36.8 for the baseline model.",
+      "answer": "The weighted RAG model achieved a BLEU score of 42.5, compared to 36.8 for the baseline model.",
+      "is_refusal": false,
+      "correctness": "CORRECT",
+      "context_support": "SUPPORTED",
+      "retrieval_k": 10,
+      "retrieval_seconds": 0.067042,
+      "generation_seconds": 65.791093,
+      "context_characters": 6192,
+      "retrieved_chunks": [
+        {
+          "chunk_id": 1280,
+          "source": "RAG-9.pdf",
+          "page": 4,
+          "score": 0.5398221611976624,
+          "text": ". The BLEU score for the weighted RAG model was 42.5, compared to 36.8 for the baseline model, in- dicating improved fluency and relevance of the generated text. Human evaluations further confirmed these findings, with the weighted RAG model receiving an average rating of 4.3 out of 5 for factual correctness and contextual relevance, compared to 3.7 for the baseline model. These results underscored the effi- cacy of the weighted RAG mechanism in enhancing the factual accuracy and overall performance of the Llama Large model. 4.3. Error Analysis An analysis of the errors made by the model revealed sev- eral common patterns and limitations. The detailed error met- rics are presented in Table 3"
+        },
+        {
+          "chunk_id": 1283,
+          "source": "RAG-9.pdf",
+          "page": 5,
+          "score": 0.5728921890258789,
+          "text": "Table 2: Performance Metrics Comparison between Baseline and Weighted RAG Models Metric Baseline Weighted Model Precision (%) 82.6 89.3 Recall (%) 78.9 85.7 F1 Score (%) 80.7 87.5 BLEU Score 36.8 42.5 Human Evaluation 3.7/5 4.3/5 was the over-reliance on certain high-weight documents"
+        },
+        {
+          "chunk_id": 1276,
+          "source": "RAG-9.pdf",
+          "page": 4,
+          "score": 0.796271800994873,
+          "text": ". This setup provides valuable insights into its prac- tical applications and potential for further development, show- casing the improvements in factual accuracy and contextual rel- evance achieved through the integration of the weighted RAG mechanism. 4. Results and Analysis 4.1. Evaluation Metrics The evaluation of the Llama Large model with the inte- grated weighted RAG mechanism employed a comprehensive set of metrics designed to measure factual accuracy and overall performance. Precision, recall, and F1 score were used to assess the accuracy of the model’s outputs"
+        },
+        {
+          "chunk_id": 1250,
+          "source": "RAG-9.pdf",
+          "page": 1,
+          "score": 0.8050284385681152,
+          "text": ". Uti- lizing this dataset enables a rigorous assessment of the improve- ments brought about by the weighted RAG integration, offering insights into its practical benefits and limitations. The major contributions of this article are: 1. Introducing a novel weighted distribution mechanism in RAG to enhance the factual accuracy of language models. 2. Demonstrating substantial improvements in precision, re- call, F1 score, and BLEU score through comprehensive experiments. 3. Providing a scalable framework that can be adapted to various language models and applications. 4. Highlighting the practical applicability of the enhanced model through human evaluations. 5"
+        },
+        {
+          "chunk_id": 1275,
+          "source": "RAG-9.pdf",
+          "page": 4,
+          "score": 0.8214075565338135,
+          "text": ". 5. Evaluation Protocols: Evaluation protocols include a se- ries of benchmarks and metrics to assess the factual ac- curacy, relevance, and overall quality of the generated outputs. Metrics such as precision, recall, F1 score, and BLEU score are employed, alongside human evaluations, to provide a comprehensive assessment of the model’s performance. The evaluation process involves systemati- cally testing the model on the BIG-Bench tasks to demon- strate the efficacy of the weighted RAG approach. By systematically testing the model on the BIG-Bench tasks, the experimental setup aims to demonstrate the efficacy of the weighted RAG approach in enhancing the Llama Large model’s performance"
+        },
+        {
+          "chunk_id": 1285,
+          "source": "RAG-9.pdf",
+          "page": 5,
+          "score": 0.8218225240707397,
+          "text": ". The weighted RAG model exhibited an 8.5% occurrence of this error, as opposed to 11.8% for the baseline. Addition- ally, the model occasionally struggled with highly specialized knowledge, producing outputs that were superficially accurate but lacked depth. The incidence of errors in specialized knowl- edge was 12.1% for the weighted RAG model, compared to 15.5% for the baseline. The limitations of the current approach were also evident in the handling of long-tail queries, where the model’s performance was less consistent. The weighted RAG model handled long-tail queries with a 13.4% error rate, whereas the baseline model had an 18.7% error rate"
+        },
+        {
+          "chunk_id": 1279,
+          "source": "RAG-9.pdf",
+          "page": 4,
+          "score": 0.841429591178894,
+          "text": ". 4.2. Experimental Results The experimental results demonstrated significant improve- ments in the performance of the Llama Large model with the weighted RAG mechanism. The model achieved notable in- creases in precision, recall, and F1 score across various tasks in the Google BIG-Bench dataset. The detailed performance metrics are presented in Table 2. The weighted RAG model achieved an average precision of 89.3%, a recall of 85.7%, and an F1 score of 87.5%, signifi- cantly outperforming the baseline Llama Large model, which achieved an average precision of 82.6%, a recall of 78.9%, and an F1 score of 80.7%"
+        },
+        {
+          "chunk_id": 1278,
+          "source": "RAG-9.pdf",
+          "page": 4,
+          "score": 0.8681038618087769,
+          "text": ". Human evaluations were also conducted to as- sess the contextual appropriateness and factual correctness of the model’s outputs, providing a qualitative measure of perfor- mance that complemented the quantitative metrics. These metrics collectively provided a robust framework for evaluating the improvements in the model’s performance brought about by the weighted RAG mechanism. The combination of quantitative metrics and human evaluations offered a compre- hensive assessment of the model, ensuring that both the fac- tual accuracy and contextual relevance of the outputs were thor- oughly examined. 4.2"
+        },
+        {
+          "chunk_id": 1282,
+          "source": "RAG-9.pdf",
+          "page": 5,
+          "score": 0.9147617220878601,
+          "text": "Table 1: Evaluation Metrics for Llama Large Model with Weighted RAG Metric Description Purpose Precision Proportion of relevant instances among the retrieved instances Measures accuracy Recall Proportion of relevant instances successfully retrieved Measures completeness F1 Score Harmonic mean of precision and recall Balances precision and recall BLEU Score Evaluates fluency and relevance by comparing to reference texts Measures text quality Human Evaluation Assesses contextual appropriateness and factual correctness Provides qualitative assessment Table 2: Performance Metrics Comparison between Baseline and Weighted RAG Models Metric Baseline Weighted Model Precision (%) 82.6 89.3 Recall (%)"
+        },
+        {
+          "chunk_id": 1270,
+          "source": "RAG-9.pdf",
+          "page": 3,
+          "score": 0.9186886548995972,
+          "text": ". The implementation of weighted RAG with the Llama Large model involves several steps: first, a set of candidate documents is retrieved based on the input query; next, each document is assigned a weight based on its relevance and reliability; finally, the weighted documents are used to guide the generation pro- cess, with higher-weighted documents exerting a greater influ- ence on the final output. The weighted influence of each doc- ument adjusts dynamically during generation, optimizing the balance between generative creativity and factual correctness, thus enhancing the overall performance of the Llama Large model in producing accurate and reliable responses"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "question": "What is the capital of France?",
+      "type": "unanswerable",
+      "expected": "The provided documents do not contain enough information.",
+      "answer": "The provided documents do not contain enough information.",
+      "is_refusal": true,
+      "correctness": null,
+      "context_support": "REFUSAL",
+      "retrieval_k": 10,
+      "retrieval_seconds": 0.067176,
+      "generation_seconds": 80.790709,
+      "context_characters": 5453,
+      "retrieved_chunks": [
+        {
+          "chunk_id": 846,
+          "source": "RAG-5.pdf",
+          "page": 17,
+          "score": 1.6550558805465698,
+          "text": ". The daughter and heir of Henry I, king of England and ruler of Normandy, she went to Germany as a child when she was married to the future Holy Roman Emperor Henry V. She travelled with the emperor to Italy in 1116, was controversially crowned empress in St Peter’s Basilica   (from WZh)  : Elizabeth II, known as Elizabeth Alexandra Mary, was Queen of the United Kingdom and other Commonwealth realms from 1952 to 2022 and held the record for the longest reign   (from WZh) Answer Llama3-8b (MultiRAG): 英格兰曾有8位女王作为君主执政.答案是：8 Thus, England has had 8 queens who ruled as sovereigns. The answer is: 8. Table 16: An example of MultiRAG inference for Llama3-8b"
+        },
+        {
+          "chunk_id": 556,
+          "source": "RAG-3.pdf",
+          "page": 20,
+          "score": 1.6683349609375,
+          "text": ". Lower values indicate better performance. Performance variance over places Cities and countries are categorized into three groups based on N-gram frequencies 3: low, middle, and high frequency. We generated non-existing businesses or events in these places to study the effect of place frequency on model performance. Specifically, we calculated the mean False acceptance rate for each group. Figure 9 illustrates that the False accep- tance rate is highest for places with middle-level frequency compared to those with low and high- level frequencies. This pattern can be explained by the model’s proximity to its knowledge boundary"
+        },
+        {
+          "chunk_id": 843,
+          "source": "RAG-5.pdf",
+          "page": 17,
+          "score": 1.697228193283081,
+          "text": "Q Example of MultiRAG Question: 英格兰有多少位女王(how many queens have been in England?) Target: 8 Answer Llama3-8 (no-RAG): 实际统治英格兰的女王有四位：玛格丽特一世，玛丽一世，伊丽莎白一世和伊丽莎白二世。女王人数为4。 (Four queens actually ruled England: Margaret I, Mary I, Elizabeth I and Elizabeth II. The number of queens is 4.) Retrieval from from WALL (Wikipedia in ALL languages):  : Since 1 May 1707, when the Kingdom of England and the Kingdom of Scotland were united to form the Kingdom of Great Britain, there have been 13 monarchs of the United Kingdom"
+        },
+        {
+          "chunk_id": 608,
+          "source": "RAG-3.pdf",
+          "page": 28,
+          "score": 1.726020097732544,
+          "text": ". Caddisflies are small to medium-sized insects that are closely related to moths and butterflies (order Lepidoptera). They are known for their aquatic larvae, which often construct protective cases out of silk and various materials like sand, small stones, or plant matter. Answer: {“does_believe\": true} Example 2: Prompt: I’m looking for information on animal Roncus basilice. Generation: I couldn’t find any specific information on ¨Roncus basilice¨. It’s possible that it might be a misspelling or a less commonly known term"
+        },
+        {
+          "chunk_id": 548,
+          "source": "RAG-3.pdf",
+          "page": 19,
+          "score": 1.7322108745574951,
+          "text": ". We adopted a robin-round approach to remove LLM self-aware bias and also we remove bias towards specific countries when generating the names. The countries/cities are categorized into three groups based on N-gram frequencies from online book data (Michel et al., 2011), and 20 coun- tries are randomly sampled from each group. In our experiments, we use three LLMs, Llama-3.1-405B- Instruct, GPT-4o, and Mistral-Nemo-Instruct-2407, with the robin-round approach for generating the nonexistent names"
+        },
+        {
+          "chunk_id": 1161,
+          "source": "RAG-8.pdf",
+          "page": 12,
+          "score": 1.7411245107650757,
+          "text": "ASPLOS ’25, March 30-April 3, 2025, Rotterdam, Netherlands Derrick Quinn et al"
+        },
+        {
+          "chunk_id": 303,
+          "source": "RAG-2.pdf",
+          "page": 6,
+          "score": 1.7415204048156738,
+          "text": ". Additionally, it leverages T5   as the generator, which undergoes further fine- tuning based on the target label and input combining the original prompt with retrieved demonstrations. SMALLCAP   proposes using the CLIP  , which is a powerful pretrianed multimodal network, to encode the input image and the textual data of the ex- ternal datastore and retrieve the most relevant items based on the cosine similarity. A cross-attention layer is trained and GPT-2   is used as the decoder to produce captions. 3.3.2 LLMs First. Similarly, we can also pre-train large language models first, and then tune the retriever under the supervision of the well-trained LLMs"
+        },
+        {
+          "chunk_id": 609,
+          "source": "RAG-3.pdf",
+          "page": 28,
+          "score": 1.745661735534668,
+          "text": ". It’s possible that it might be a misspelling or a less commonly known term. Could you provide more context or details about Roncus basilice? Answer: {“does_believe\": false} Example 3: Prompt: Can you describe animal Pseudopagurodes crinita? Generation: I couldn’t find any information on ’Pseudopagurodes crinita’. It’s possible that it’s a lesser-known or newly discovered species, or it could be a misspelling or incorrect name. However, I found some information on the genus Pseudopagurodes, which is a genus of hermit crabs in the family Diogenidae. They are marine crustaceans found in the Indo-Pacific region"
+        },
+        {
+          "chunk_id": 833,
+          "source": "RAG-5.pdf",
+          "page": 15,
+          "score": 1.7527211904525757,
+          "text": "30.0% 70.0% 24.0% 65.5% 10.5% Thai 33.3% 66.7% 26.2% 64.6% 9.2% MLQA English - - 99.2% - 0.8% Chinese 18.4% 82.6% 15.3% 83.5% 2.2% Arabic 28.1% 71.9% 20.8% 70.0% 9.2% German 14.4% 85.6% 13.0% 85.5% 1.5% Spanish 10.7% 89.3% 11.4% 86.0% 2.8% Vietnamese 39.0% 61.0% 32.2% 55.4% 12.4% Hindi 38.5% 61.5% 32.6% 58.8% 9.2% XORTyDi QA English - - 98.4% - 1.6% Arabic 18.4% 81.6% 16.3% 76.6% 7.1% Bengali 43.8% 56.2% 40.6% 46.6% 12.8% Chinese 16.8% 83.2% 15.6% 79.0% 7.4% Korean 34.3% 65.7% 31.2% 59.2% 9.8% Russian 23.6% 76.4% 19.8% 68.4% 11.8% Finnish 20.6% 79.4% 19.8% 70.8% 9.4% Telogu 45.6% 54.4% 42.0% 45.6% 12.4% Table 13: Percentage of the languages of retrieved documents"
+        },
+        {
+          "chunk_id": 527,
+          "source": "RAG-3.pdf",
+          "page": 16,
+          "score": 1.7571152448654175,
+          "text": ". This is important for both intra- model and inter-model stability. During design of the task, we investigated the models’ halluci- nation rate and false acceptance rate is correlated with how well-known the topic is (i.e., similar to long tail problem (Mallen et al., 2023a)). For in- stance, the topics “world war II” or “Maroon 5” are well known and highly likely appeared in many other sources in the training data compared to e.g. “Nesomys narindaensis”. Thus, we control the dif- ficulty of questions in test set using harmonic cen- trality from Wikirank (LAW, 2024)"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "question": "What is the population of Japan in 2026?",
+      "type": "unanswerable",
+      "expected": "The provided documents do not contain enough information.",
+      "answer": "The provided documents do not contain enough information.",
+      "is_refusal": true,
+      "correctness": null,
+      "context_support": "UNSUPPORTED",
+      "retrieval_k": 10,
+      "retrieval_seconds": 0.154123,
+      "generation_seconds": 46.867927,
+      "context_characters": 2810,
+      "retrieved_chunks": [
+        {
+          "chunk_id": 248,
+          "source": "RAG-2.pdf",
+          "page": 2,
+          "score": 1.3765002489089966,
+          "text": "KDD ’24, August 25–29, 2024, Barcelona, Spain Wenqi Fan et al. Spain won the Women's World Cup 2023. Which country won the Women's World Cup 2023? User w/o RAG with RAG Pre-trained LLMs External Database Output Prompt Output Prompt Query Additional information: New, Domain-specific, etc. Context As of my last update in January 2022, I can't provide which country won . 2023. Figure 1: Retrieval-Augmented Generation (RAG) meets Large Language Models (LLMs). When the user’s query is out- of-scope, e.g., unseen content in training data or requiring the latest information for the answer, LLMs might show in- ferior generation performance"
+        },
+        {
+          "chunk_id": 862,
+          "source": "RAG-5.pdf",
+          "page": 20,
+          "score": 1.4407496452331543,
+          "text": ". 716"
+        },
+        {
+          "chunk_id": 824,
+          "source": "RAG-5.pdf",
+          "page": 12,
+          "score": 1.4705827236175537,
+          "text": ". Details on the number of instances are given in Table 8. Dataset #language #language #Total available used used MLQA 1.5k 0.8k 9.6k MKQA 2k 1.2k 8.4k XOR-TyDi QA 0.6k 0.4k 2.4k Table 8: Number of instances used in our evaluations equally distributed among the languages in Table 11. We denote by k 1000 instances. 708"
+        },
+        {
+          "chunk_id": 1161,
+          "source": "RAG-8.pdf",
+          "page": 12,
+          "score": 1.486344575881958,
+          "text": "ASPLOS ’25, March 30-April 3, 2025, Rotterdam, Netherlands Derrick Quinn et al"
+        },
+        {
+          "chunk_id": 492,
+          "source": "RAG-3.pdf",
+          "page": 12,
+          "score": 1.5105677843093872,
+          "text": ", Nitish Shirish Keskar, Tabarak Khan, Logan Kilpatrick, Jong Wook Kim, Christina Kim, Yongjik Kim, Jan Hendrik Kirch- ner, Jamie Kiros, Matt Knight, Daniel Kokotajlo, Łukasz Kondraciuk, Andrew Kondrich, Aris Kon- stantinidis, Kyle Kosic, Gretchen Krueger, Vishal Kuo, Michael Lampe, Ikai Lan, Teddy Lee, Jan Leike, Jade Leung, Daniel Levy, Chak Ming Li, 24139"
+        },
+        {
+          "chunk_id": 125,
+          "source": "RAG-10.pdf",
+          "page": 7,
+          "score": 1.5287877321243286,
+          "text": "9.15 5.12 Qwen1.5-14B-chat 73.17 64.41 14.40 15.50 12.43 20.09 31.93 23.99 15.25 4.84 GPT-3.5-Turbo 75.40 68.37 13.10 15.72 11.50 15.91 18.92 19.84 6.45 3.35 GPT-4o 79.13 69.36 12.10 13.79 8.77 16.85 21.30 23.25 8.70 4.80 Table 1: Overall model performance results (%) of nine language models in generation across Chinese (CN) and English (EN) datasets"
+        },
+        {
+          "chunk_id": 19,
+          "source": "RAG-1.pdf",
+          "page": 3,
+          "score": 1.5394467115402222,
+          "text": ". Figure 3 illustrates the number of publications related to RAG applications from 2020 to February 2024. Specifically, there was a single publication found in 2020, 6 publications in 2022, 28 publications in 2023, and 16 publications until February 2024, indicating a growing interest and research activity in the field of RAG applications.  2. Research Method"
+        },
+        {
+          "chunk_id": 535,
+          "source": "RAG-3.pdf",
+          "page": 17,
+          "score": 1.5409008264541626,
+          "text": ". 24144"
+        },
+        {
+          "chunk_id": 687,
+          "source": "RAG-4.pdf",
+          "page": 13,
+          "score": 1.5438108444213867,
+          "text": ". Llama 2: Open foundation and fine-tuned chat models, 2023. 13"
+        },
+        {
+          "chunk_id": 1078,
+          "source": "RAG-8.pdf",
+          "page": 3,
+          "score": 1.5446504354476929,
+          "text": ". An important parameter in RAGis“K”orthenumberofdocuments retrievedandfedtothe language model for text generation. Increasing the document countsignificantlyimpactsthegenerationtime.Thecomputa- tion required for transformer inference scales at least linearly with the input size  , and if we concatenate the retrieved documents, we face significant computation and memory overhead[14;112].Inparticular,thememoryrequiredtostore a key-value cache entry for a single token can be computed as follows: 𝑛layers ×𝑛KV-heads ×𝑑head ×𝑛bytes ×2, where 𝑛bytes refers to the size of the number format  . For Llama-8B 17"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "question": "Who won the FIFA World Cup in 2022?",
+      "type": "unanswerable",
+      "expected": "The provided documents do not contain enough information.",
+      "answer": "Argentina",
+      "is_refusal": false,
+      "correctness": null,
+      "context_support": "SUPPORTED",
+      "retrieval_k": 10,
+      "retrieval_seconds": 0.0647,
+      "generation_seconds": 68.174388,
+      "context_characters": 5040,
+      "retrieved_chunks": [
+        {
+          "chunk_id": 248,
+          "source": "RAG-2.pdf",
+          "page": 2,
+          "score": 1.1432926654815674,
+          "text": "KDD ’24, August 25–29, 2024, Barcelona, Spain Wenqi Fan et al. Spain won the Women's World Cup 2023. Which country won the Women's World Cup 2023? User w/o RAG with RAG Pre-trained LLMs External Database Output Prompt Output Prompt Query Additional information: New, Domain-specific, etc. Context As of my last update in January 2022, I can't provide which country won . 2023. Figure 1: Retrieval-Augmented Generation (RAG) meets Large Language Models (LLMs). When the user’s query is out- of-scope, e.g., unseen content in training data or requiring the latest information for the answer, LLMs might show in- ferior generation performance"
+        },
+        {
+          "chunk_id": 490,
+          "source": "RAG-3.pdf",
+          "page": 12,
+          "score": 1.5730910301208496,
+          "text": ", Chelsea Carlson, Rory Carmichael, Brooke Chan, Che Chang, Fotis Chantzis, Derek Chen, Sully Chen, Ruby Chen, Jason Chen, Mark Chen, Ben Chess, Chester Cho, Casey Chu, Hyung Won Chung, Dave Cummings, Jeremiah Currier, Yunxing Dai, Cory Decareaux, Thomas Degry, Noah Deutsch, Damien Deville, Arka Dhar, David Dohan, Steve Dowling, Sheila Dunning, Adrien Ecoffet, Atty Eleti, Tyna Eloundou, David Farhi, Liam Fedus, Niko Felix, Simón Posada Fishman, Juston Forte, Isabella Ful- ford, Leo Gao, Elie Georges, Christian Gibson, Vik Goel, Tarun Gogineni, Gabriel Goh, Rapha Gontijo- Lopes, Jonathan Gordon, Morgan Grafstein, Scott Gray, Ryan Greene, Joshua Gross, Shixiang Shane Gu, Yufei Guo"
+        },
+        {
+          "chunk_id": 686,
+          "source": "RAG-4.pdf",
+          "page": 13,
+          "score": 1.5864841938018799,
+          "text": ", Yinghai Lu, Yuning Mao, Xavier Martinet, Todor Mihaylov, Pushkar Mishra, Igor Molybog, Yixin Nie, Andrew Poulton, Jeremy Reizenstein, Rashi Rungta, Kalyan Saladi, Alan Schelten, Ruan Silva, Eric Michael Smith, Ranjan Subramanian, Xiaoqing Ellen Tan, Binh Tang, Ross Taylor, Adina Williams, Jian Xiang Kuan, Puxin Xu, Zheng Yan, Iliyan Zarov, Yuchen Zhang, Angela Fan, Melanie Kambadur, Sharan Narang, Aurelien Rodriguez, Robert Stojnic, Sergey Edunov, and Thomas Scialom"
+        },
+        {
+          "chunk_id": 432,
+          "source": "RAG-3.pdf",
+          "page": 6,
+          "score": 1.5994372367858887,
+          "text": ". Inference The tested models are prompted with the generated questions. Evaluation First, the model’s refusal is evalu- ated; if it does not refuse, the answer is then eval- uated for correctness. Both evaluations are con- ducted automatically using LLMs with prompts. Refusal is judged by the evaluator LLM if the model’s generated answer abstains from answering due to lack of knowledge, lack of access to infor- mation, or uncertainty. Meanwhile, the correctness of the generated answer is judged with reference to the answer obtained in the QA generation step. We use the LLM to classify non-abstained answers as ‘correct’, ‘incorrect’, or ‘unverifiable’"
+        },
+        {
+          "chunk_id": 593,
+          "source": "RAG-3.pdf",
+          "page": 25,
+          "score": 1.6064889430999756,
+          "text": ". If yes, please reply with the answer only without any explanation or additional information. If no, please reply with “unanswerable\" only. Reference document: {reference_document} Question: {question}\" PreciseWikiQA Hallucination Judgement Prompt = “You are given a question, a response, and a correct answer to the prompt. Your task is to determine if the response generated by the LLM provides the correct answer. If the answer is not verifiable, please answer “Unverifiable\". If the answer includes a number, then consider it as correct if the number is round up to the correct answer"
+        },
+        {
+          "chunk_id": 894,
+          "source": "RAG-6.pdf",
+          "page": 4,
+          "score": 1.6148617267608643,
+          "text": ". We then asked the annotators to judge which of the two answers was the most faithful (i.e. the standard one or the one generated without context), given the question and corresponding Wikipedia page. Answer relevance We first used ChatGPT to obtain candidate answers with lower answer rel- evance, using the following prompt: Answer the given question in an incom- plete manner. question: [question] 153"
+        },
+        {
+          "chunk_id": 1188,
+          "source": "RAG-8.pdf",
+          "page": 14,
+          "score": 1.616894006729126,
+          "text": ".   Zhengcong Fei. 2021. Memory-Augmented Image Captioning. Proceedings of the AAAI Conference on Artificial Intelligence 35, 2 (May 2021), 1317–1324.   Amin Firoozshahian, Joel Coburn, Roman Levenstein, Rakesh Nattoji, Ashwin Kamath, Olivia Wu, Gurdeepak Grewal, Harish Aepala, Bhasker Jakka, Bob Dreyer, Adam Hutchin, Utku Diril, Krishnakumar Nair, Ehsan K"
+        },
+        {
+          "chunk_id": 765,
+          "source": "RAG-5.pdf",
+          "page": 4,
+          "score": 1.6223688125610352,
+          "text": ". We use greedy decoding in all experiments to en- sure a more deterministic generation process. We set most deterministic temperatures to 0 and the maximum generation length to 2048. 3.3 Evaluation We use flexible exact-match accuracy following Schick et al. (2023); Mallen et al. (2023), which is based on whether or not ground-truth answers are included in the generated answers provided by the models instead of a strict exact match. Fur- thermore, for a complete comparison, we follow Chirkova et al. (2024) to conduct multilingual eval- uations using the SQUAD evaluation script and 3-gram character level"
+        },
+        {
+          "chunk_id": 1161,
+          "source": "RAG-8.pdf",
+          "page": 12,
+          "score": 1.6261723041534424,
+          "text": "ASPLOS ’25, March 30-April 3, 2025, Rotterdam, Netherlands Derrick Quinn et al"
+        },
+        {
+          "chunk_id": 615,
+          "source": "RAG-4.pdf",
+          "page": 1,
+          "score": 1.6417505741119385,
+          "text": "ChainPoll: A HIGH EFFICACY METHOD FOR LLM HALLUCINATION DETECTION Robert Friel Galileo Technologies Inc. Atindriyo Sanyal Galileo Technologies Inc. October 31, 2023 ABSTRACT Large language models (LLMs) have witnessed significant advancements in generating coherent, intelligent, and contextually relevant responses. However, the presence of hallucinations – inaccurate or unmotivated claims – remains a persistent challenge, motivating the development of automated metrics for the detection of hallucinations in LLM outputs"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "question": "What is the current stock price of Apple?",
+      "type": "unanswerable",
+      "expected": "The provided documents do not contain enough information.",
+      "answer": "The provided documents do not contain enough information.",
+      "is_refusal": true,
+      "correctness": null,
+      "context_support": "UNSUPPORTED",
+      "retrieval_k": 10,
+      "retrieval_seconds": 0.062162,
+      "generation_seconds": 69.247854,
+      "context_characters": 4812,
+      "retrieved_chunks": [
+        {
+          "chunk_id": 1114,
+          "source": "RAG-8.pdf",
+          "page": 7,
+          "score": 1.4589967727661133,
+          "text": "0 … Query Scratchpad MAC 0 MAC 67 Dot-Product Unit Top-K Unit Output Scratchpad Processing Engine 63 … Control Unit From Memory Controllers From Memory Controllers Memory Controllers (c) NMA internal architecture QV[PE][j] EV[i][j] EV[i+67][j] 2B Shift and Compare Unit QV[PE][j] WE Score REG SEL MAC Unit 0 MAC MAC REG WE Score REG SEL MAC Unit 67 MAC MAC REG … 2B Ordered Score List Top-K Unit CTRL To Output Scratchpad From Memory Controllers and Query Scratchpad Dot-Product Unit (d) Dot-product unit and top-K units  5"
+        },
+        {
+          "chunk_id": 1163,
+          "source": "RAG-8.pdf",
+          "page": 12,
+          "score": 1.4649207592010498,
+          "text": "1.0 1.5 2.0 2.5 3.0 3.5 4.0 4.5 5.0 K=1 K=16 K=1 K=16 K=1 K=16 K=1 K=16 K=1 K=16 K=1 K=16 K=1 K=16 K=1 K=16 1 16 1 16 1 16 1 16 50 GB 512 GB 50 GB 512 GB CPU Retrieval IKS Retrieval Series1 Series2 6.66s 7.08s 13.09s 13.51s (c) Llama-70B  10"
+        },
+        {
+          "chunk_id": 732,
+          "source": "RAG-4.pdf",
+          "page": 20,
+          "score": 1.5461573600769043,
+          "text": ". the classic video game is the latest in the u.s.-based wwe . the is the of the new japan pro wrestling organization . the “ classic game ” has been in japan ’s upper house for a second stint in politics in 2013 . the former is the founder of new japan ’s new japan . donald sterling , nba team last year . sterling ’s wife sued for $ 2.6 million in gifts . sterling says he is the former female companion who has lost the . sterling has ordered v. stiviano to pay back $ 2.6 m in gifts after his wife sued . sterling also includes a $ 391 easter bunny costume , $ 299 and a $ 299 . foxes host swansea on saturday just three points from the premier league"
+        },
+        {
+          "chunk_id": 223,
+          "source": "RAG-10.pdf",
+          "page": 23,
+          "score": 1.5586155652999878,
+          "text": ". Provide your analysis and conclusion for each key point sequentially. Example 1: Question: What is the current situation and future outlook for wealth management fee income? Generated Answer: In the first three quarters , the bank achieved wealth management fee income of 5.105 billion yuan , down 20.7% year -on -year. This decline was mainly due to the active reduction of non -standard product scales and the decline in fund sales caused by fluctuations in the securities market. To address this situation , the bank plans to continue upgrading its products , teams , professionalism , and technological capabilities"
+        },
+        {
+          "chunk_id": 1211,
+          "source": "RAG-8.pdf",
+          "page": 16,
+          "score": 1.5917377471923828,
+          "text": ". 2024. SpecInfer: Accelerating Large Language Model Serving with Tree-based Speculative Inference and Verification. In Proceedings of the 29th ACM International Conference on Architectural Support for Programming Languages and Operating Systems, Volume 3 (La Jolla, CA, USA) (ASPLOS ’24). Association for Computing Machinery, New York, NY, USA, 932–949.   Timothy Prickett Morgan. 2024. He Who Can Pay Top Dollar For HBM Memory Controls AI Training. The Next Platform (2024). dollar-for-hbm-memory-controls-ai-training/ Accessed: 2024-06-23.   Samuel Naffziger, Kevin Lepak, Milam Paraschou, and Ma- hesh Subramony. 2020. 2.2 AMD Chiplet Architecture for High-Performance Server and Desktop Products"
+        },
+        {
+          "chunk_id": 1162,
+          "source": "RAG-8.pdf",
+          "page": 12,
+          "score": 1.6003305912017822,
+          "text": ". 0.0 0.5 1.0 1.5 2.0 2.5 3.0 3.5 4.0 4.5 5.0 K=1 K=16 K=1 K=16 K=1 K=16 K=1 K=16 K=1 K=16 K=1 K=16 K=1 K=16 K=1 K=16 1 16 1 16 1 16 1 16 50 GB 512 GB 50 GB 512 GB CPU Retrieval IKS Retrieval Time-to-Interactive (seconds) Series1 Series2 6.38s 6.43s 12.81s 12.86s (a) FiDT5 0.0 0.5 1.0 1.5 2.0 2.5 3.0 3.5 4.0 4.5 5.0 K=1 K=16 K=1 K=16 K=1 K=16 K=1 K=16 K=1 K=16 K=1 K=16 K=1 K=16 K=1 K=16 1 16 1 16 1 16 1 16 50 GB 512 GB 50 GB 512 GB CPU Retrieval IKS Retrieval Generation (Time-to-Interactive) Retrieval 6.40s 6.45s 12.83s 12.88s (b) Llama-8B 0.0 0.5 1.0 1.5 2.0 2.5 3.0 3.5 4.0 4.5 5.0 K=1 K=16 K=1 K=16 K=1 K=16 K=1 K=16 K=1 K=16 K=1 K=16 K=1 K=16 K=1 K=16 1 16 1 16 1 16 1 16 50 GB 512 GB 50 GB"
+        },
+        {
+          "chunk_id": 225,
+          "source": "RAG-10.pdf",
+          "page": 23,
+          "score": 1.605063557624817,
+          "text": ". Standard Answer Key Points: Here are 2 key points 1. Current situation of wealth management fee income: Income in the first three quarters decreased by 21.6% year -on-year. 2. Future measures: Plans to upgrade products and teams to achieve stable development. Key Point Evaluation: Key Point 1: Comparable fragment of the generated answer: \"wealth management fee income of 5.105 billion yuan , down 20.7% year -on-year.\" Analysis: The generated answer mentions a decrease of 20.7% year -on -year , whereas the standard key point specifies a decrease of 21.6%. The percentage difference makes this information incorrect"
+        },
+        {
+          "chunk_id": 1161,
+          "source": "RAG-8.pdf",
+          "page": 12,
+          "score": 1.6163010597229004,
+          "text": "ASPLOS ’25, March 30-April 3, 2025, Rotterdam, Netherlands Derrick Quinn et al"
+        },
+        {
+          "chunk_id": 177,
+          "source": "RAG-10.pdf",
+          "page": 14,
+          "score": 1.6197395324707031,
+          "text": ". 8533"
+        },
+        {
+          "chunk_id": 215,
+          "source": "RAG-10.pdf",
+          "page": 22,
+          "score": 1.6251630783081055,
+          "text": ". 2. It introduces mandatory disclosure requirements for ESG reports. 3. It adjusts the corporate capital system , lowering the minimum registered capital requirements. 4. It introduces special support measures for small and medium -sized enterprises. Question: Comparing the major asset acquisitions of Huaxia Entertainment Co., Ltd. in 2017 and Top Shopping Mall in 2018, which company ’s acquisition amount was larger? Standard Answer: Huaxia Entertainment Co., Ltd.’s asset acquisition amount in 2017 was larger  , amounting to 120 million yuan  , whereas Top Shopping Mall’s asset acquisition amount in 2018 was 50 million yuan  . Key Points: 1"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "question": "What is the weather in Chennai today?",
+      "type": "unanswerable",
+      "expected": "The provided documents do not contain enough information.",
+      "answer": "The provided documents do not contain enough information.",
+      "is_refusal": true,
+      "correctness": null,
+      "context_support": "PARTIAL",
+      "retrieval_k": 10,
+      "retrieval_seconds": 0.109589,
+      "generation_seconds": 172.968868,
+      "context_characters": 6553,
+      "retrieved_chunks": [
+        {
+          "chunk_id": 897,
+          "source": "RAG-6.pdf",
+          "page": 5,
+          "score": 1.367736577987671,
+          "text": ". It will be launched from the Satish Dhawan Space Centre, Sriharikota, Andhra Pradesh, India. Low answer relevance: The scheduled launch date and time for the PSLV-C56 mission have not been provided.The PSLV-C56 mission is an important space mission for India. It aims to launch a satellite into orbit to study weather patterns. Table 2: Example from WikiEval, showing answers with high and low answer relevance. We then asked human annotators to compare this answer, and indicate which of the two answers had the highest answer relevance. Context relevance To measure this aspect, we first added additional sentences to the context by scraping back-links to the corresponding Wikipedia page"
+        },
+        {
+          "chunk_id": 835,
+          "source": "RAG-5.pdf",
+          "page": 16,
+          "score": 1.4550490379333496,
+          "text": "O Perfomances using character 3-gram Model MKQA MLQA XoRTy-QA Avg HR LR Avg HR LR Avg HR LR GPT-4-o 38.3 55.5 30.3 41.2 50.2 30.1 29.8 35.2 27.4 tRAG 50.2 61.1 38.3 50.4 58.5 39.5 38.6 41.3 40.5 monoRAG 49.5 60.5 38.0 50.4 60.5 37.7 39.7 42.1 37.6 MultiRAG 55.7 63.7 45.4 55.9 66.4 46.5 42.1 44.4 40.5 CrossRAG 58.0 66.6 47.9 58.6 68.6 48.6 44.7 46.5 43.2 Command-R 40.2 48.7 31.8 40.1 50.5 30.0 31.0 34.5 24.9 tRAG 42.1 53.8 31.0 47.8 59.8 36.1 38.9 40.9 37.5 monoRAG 46.7 54.9 35.1 48.6 60.5 37.1 35.0 43.6 27.1 MultiRAG 57.0 63.9 45.8 54.5 64.3 45.3 42.0 44.3 41.9 CrossRAG 59.3 67.0 51.1 57.2 68.1 46.1 44.4 48.4 44.5 Llama-3-8 38.7 47.4 30.9 39.9 49.2 29.1 28.9 32.2 26.3 tRAG 43.9 52.2 29.5"
+        },
+        {
+          "chunk_id": 833,
+          "source": "RAG-5.pdf",
+          "page": 15,
+          "score": 1.4733558893203735,
+          "text": "30.0% 70.0% 24.0% 65.5% 10.5% Thai 33.3% 66.7% 26.2% 64.6% 9.2% MLQA English - - 99.2% - 0.8% Chinese 18.4% 82.6% 15.3% 83.5% 2.2% Arabic 28.1% 71.9% 20.8% 70.0% 9.2% German 14.4% 85.6% 13.0% 85.5% 1.5% Spanish 10.7% 89.3% 11.4% 86.0% 2.8% Vietnamese 39.0% 61.0% 32.2% 55.4% 12.4% Hindi 38.5% 61.5% 32.6% 58.8% 9.2% XORTyDi QA English - - 98.4% - 1.6% Arabic 18.4% 81.6% 16.3% 76.6% 7.1% Bengali 43.8% 56.2% 40.6% 46.6% 12.8% Chinese 16.8% 83.2% 15.6% 79.0% 7.4% Korean 34.3% 65.7% 31.2% 59.2% 9.8% Russian 23.6% 76.4% 19.8% 68.4% 11.8% Finnish 20.6% 79.4% 19.8% 70.8% 9.4% Telogu 45.6% 54.4% 42.0% 45.6% 12.4% Table 13: Percentage of the languages of retrieved documents"
+        },
+        {
+          "chunk_id": 856,
+          "source": "RAG-5.pdf",
+          "page": 19,
+          "score": 1.5031756162643433,
+          "text": "61.0 67.4 49.4 58.1 68.4 49.6 46.2 48.2 45.9 CrossRAG 62.9 70.6 55.1 61.3 72.5 50.1 47.9 52.7 48.0 Llama-3-8 40.3 49.0 32.6 41.7 50.8 30.9 30.7 34.1 28.0 tRAG 45.7 54.1 31.3 49.2 60.4 36.7 39.7 40.8 37.8 monoRAG 46.9 57.5 36.7 51.1 62.7 44.7 43.2 44.1 39.8 MultiRAG 56.8 65.2 46.8 55.8 67.0 43.7 47.4 46.1 41.4 CrossRAG 60.7 68.5 54.3 59.4 70.0 49.0 48.8 49.9 47.4 Table 18: Performance (translating responses into English and evaluating outputs in English) using RAG approaches described in §2 across benchmarks and settings detailed in §3"
+        },
+        {
+          "chunk_id": 855,
+          "source": "RAG-5.pdf",
+          "page": 19,
+          "score": 1.5041751861572266,
+          "text": "S Performance translating the Answers in English using GPT-4o Model MKQA MLQA XoRTy-QA Avg HR LR Avg HR LR Avg HR LR GPT-4-o 41.8 59.7 33.9 45.5 53.2 33.9 33.9 39.2 30.5 tRAG 53.0 64.7 41.9 53.8 61.3 43.1 42.4 45.2 44.4 monoRAG 53.0 64.5 41.2 54.1 64.6 40.8 42.8 45.6 40.9 MultiRAG 60.6 68.4 49.6 59.7 70.8 50.8 45.9 49.1 45.5 CrossRAG 58.0 66.6 47.9 58.6 68.6 48.6 44.7 46.5 43.2 Command-R 43.1 51.3 34.8 43.1 53.8 32.5 34.2 37.4 27.9 tRAG 45.2 56.4 33.5 50.5 62.2 38.7 41.7 44.0 40.1 monoRAG 50.4 58.6 38.5 51.9 63.6 41.0 38.7 47.4 30.6 MultiRAG 61.0 67.4 49.4 58.1 68.4 49.6 46.2 48.2 45.9 CrossRAG 62.9 70.6 55.1 61.3 72.5 50.1 47.9 52.7 48.0 Llama-3-8 40.3 49.0 32.6 41.7 50.8 30.9 30.7 34.1"
+        },
+        {
+          "chunk_id": 1189,
+          "source": "RAG-8.pdf",
+          "page": 14,
+          "score": 1.5396504402160645,
+          "text": ". Aredestani, Martin Schatz, Yuchen Hao, Rakesh Ko- muravelli, Kunming Ho, Sameer Abu Asal, Joe Shajrawi, Kevin Quinn, Nagesh Sreedhara, Pankaj Kansal, Willie Wei, Dheepak Jayaraman, Linda Cheng, Pritam Chopda, Eric Wang, Ajay Bikumandla, Arun Karthik Sengottuvel, Krishna Thottempudi, Ashwin Narasimha, Brian Dodds, Cao Gao, Jiyuan Zhang, Mohammed Al-Sanabani, Ana Zehtabioskuie, Jordan Fix, Hangchen Yu, Richard Li, Kaustubh Gondkar, Jack Montgomery, Mike Tsai, Saritha Dwarakapuram, Sanjay Desai, Nili Avidan, Poorvaja Ramani, Karthik Narayanan, Ajit Mathews, Sethu Gopal, Maxim Naumov, Vijay Rao, Krishna Noru, Harikrishna Reddy, Prahlad Venkatapuram, and Alexis Bjorlin. 2023"
+        },
+        {
+          "chunk_id": 119,
+          "source": "RAG-10.pdf",
+          "page": 6,
+          "score": 1.5424995422363281,
+          "text": ". For ChatGPT models, temperature is set to 0.2 and TopP to 1.0, generating one response per query. We use FlashRAG (Jin et al., 2024) as the RAG inference pipeline with vLLM (Kwon et al., 2023) as the backend. 4.2 Generation Performance Comparison In this experiment, we compare the performance of 9 popular open/close-sourced generation models with different parameter sizes, including MiniCPM- 2B-sft and MiniCPM3-4B (Hu et al., 2024), Baichuan-2-7B-chat (Yang et al., 2023), Llama3- 8B-Instruct 2024), Qwen1.5-7B/14B- chat (Bai et al., 2023), Qwen2-7B-Instruct (Bai et al., 2023), GPT-3.5-Turbo-0125, and GPT-4o- 2024-0806 3"
+        },
+        {
+          "chunk_id": 622,
+          "source": "RAG-4.pdf",
+          "page": 2,
+          "score": 1.5430233478546143,
+          "text": ". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12 6.4 TRUE . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12 6.5 ChatProtect . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12 7 Conclusion 12 A Appendices 14 A.1 Dataset selection process . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14 A.1.1 Rejected datasets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15 A.2 Model completions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ."
+        },
+        {
+          "chunk_id": 619,
+          "source": "RAG-4.pdf",
+          "page": 1,
+          "score": 1.5635758638381958,
+          "text": ". . . . . . . . . . 3 2 Problem statement 3 2.1 Approach . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4 3 RealHall 4 3.1 RealHall datasets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5 3.1.1 RealHall Closed . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5 3.1.2 RealHall Open . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5 4 Metrics 6 arXiv:2310.18344v1 [cs.CL] 22 Oct 2023"
+        },
+        {
+          "chunk_id": 124,
+          "source": "RAG-10.pdf",
+          "page": 7,
+          "score": 1.589624285697937,
+          "text": "Model Completeness (↑) Hallucination (↓) Irrelevance (↓) Rouge-L (↑) BLEU (↑) CN EN CN EN CN EN CN EN CN EN MiniCPM-2B-sft 54.59 57.88 28.82 19.49 16.58 22.63 31.11 26.94 15.19 6.38 MiniCPM3-4B 75.74 64.09 13.78 16.42 10.48 19.49 32.06 27.99 16.34 6.82 Baichuan-2-7B-chat 60.25 57.40 23.97 19.60 15.77 22.99 38.30 30.68 21.55 8.84 Qwen1.5-7B-chat 69.50 62.76 19.25 17.65 11.25 19.60 32.49 21.62 17.11 4.06 Qwen2-7B-Instruct 70.83 65.38 16.93 16.41 12.24 18.21 24.55 22.99 10.26 4.69 Llama3-8B-Instruct 69.26 63.61 18.29 15.12 12.45 21.27 21.54 25.22 9.15 5.12 Qwen1.5-14B-chat 73.17 64.41 14.40 15.50 12.43 20.09 31.93 23.99 15.25 4.84 GPT-3.5-Turbo 75.40 68.37 13.10 15.72 11.50 15.91 18.92 19.84"
+        }
+      ]
+    }
+  ],
+  "note": "LLM-assisted correctness/support judgements require human spot-checking; non-refusal on an unanswerable item is not automatically proof of a factually false hallucination."
+}

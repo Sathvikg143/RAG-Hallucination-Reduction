@@ -1,0 +1,24 @@
+[
+  {
+    "id": "NEW-001",
+    "domain": "paper/domain name",
+    "question": "Write a specific question answerable from the indexed corpus.",
+    "type": "answerable",
+    "expected": "Concise answer grounded in the corpus.",
+    "evidence": [
+      {"source": "exact_filename.pdf", "page": 1, "quote": "Exact supporting sentence or short passage."}
+    ],
+    "relevant_chunk_ids": [],
+    "annotation_status": "needs_human_verification"
+  },
+  {
+    "id": "NEW-002",
+    "domain": "paper/domain name",
+    "question": "Ask for a detail that is genuinely absent or unresolved in the indexed corpus.",
+    "type": "unanswerable",
+    "expected": "The indexed documents do not provide enough evidence to answer this question.",
+    "evidence": [],
+    "absence_check": "Record which documents/sections were searched and why evidence is absent.",
+    "annotation_status": "needs_human_verification"
+  }
+]

@@ -1,0 +1,379 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage[table]{xcolor}
+
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+\renewcommand{\algorithmicensure}{\textbf{Output:}}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\begin{document}
+
+\title{Reducing LLM Hallucination in Knowledge Intensive Tasks via Retrieval-Augmented Generation
+}
+
+\author{\IEEEauthorblockN{1\textsuperscript{st} Sathvik Guptha A}
+\IEEEauthorblockA{\textit{School of Computer Science and Engineering} \\
+\textit{Vellore Institute of Technology, Chennai, India}\\
+sathvikguptha.a2022@vitstudent.ac.in \\}
+
+}
+
+\maketitle
+
+\begin{abstract}
+Large Language Models (LLMs) can produce fluent but unsupported responses in knowledge-intensive question answering. This paper reports an initial implementation study of Retrieval-Augmented Generation (RAG) using a local PDF corpus, 700-character text chunks with 150-character overlap, the all-MiniLM-L6-v2 embedding model, a project-specific VectorStore wrapper backed by FAISS IndexFlatL2, and Gemma 3 4B through Ollama. Retrieved passages are added to a context-restricted prompt. An initial benchmark of 10 questions (five labelled answerable and five labelled unanswerable) was used to compare a no-retrieval baseline with RAG configurations at $k=5$ and $k=10$. The recorded baseline results were 60\% answer accuracy, 80\% non-refusal rate on the benchmark's unanswerable items (previously termed hallucination rate), and 20\% refusal accuracy. The recorded RAG results were 80\% answer accuracy at $k=5$ and 100\% at $k=10$, with all five unanswerable items refused in both configurations. These results are preliminary: the benchmark is small, some unanswerable items are general-knowledge questions, and the original baseline and RAG prompts are not equivalent. Therefore, the results establish only the observed behaviour on this pilot benchmark and do not demonstrate general hallucination elimination. A revised evaluation with evidence-annotated questions and a prompt-matched no-retrieval control is required to test the effect of retrieval more rigorously.
+\end{abstract}
+
+\section{Introduction}
+\subsection{Introduction to Large Language Models}
+Artificial Intelligence (AI) has made significant progress in Natural Language Processing (NLP) through the development of Large Language Models (LLMs). Most modern LLMs are based on Transformer architectures and are trained on large collections of text, enabling them to perform tasks such as question answering, summarization, translation, dialogue, code generation, and reasoning. Unlike traditional NLP systems designed for specific tasks, LLMs can support multiple applications through a single pretrained model, contributing to the growth of generative AI.
+
+Despite their strong language-generation capabilities, LLMs do not always produce factually reliable information. Their knowledge primarily comes from the data available during pre-training and does not automatically update when new information becomes available. Consequently, models may generate outdated or incomplete responses for recent events, specialized topics, or information that was poorly represented in their training data. Updating internal knowledge generally requires additional training or fine-tuning, which can be computationally expensive. [1], [2]
+
+A related problem is hallucination, where an LLM generates information that is fabricated, unsupported, or inconsistent with available evidence. Such responses may still appear fluent and convincing, making hallucinations difficult to identify without external verification. Recent benchmarks and detection approaches, including HalluLens and ChainPoll, have been developed to study and detect this problem. [3], [4]
+
+\subsection{Challenges of Large Language Models}
+Factual reliability is particularly important in knowledge-intensive applications. Hallucinations may occur when a model relies on its internal knowledge even when the required information is unavailable or when the generated response contradicts the supplied evidence. Therefore, fluency alone cannot be considered an indication of factual correctness.
+
+Retrieval-based approaches address part of this limitation by providing external information during inference. Retrieval-Augmented Generation (RAG) separates knowledge storage from language generation, allowing an external knowledge collection to be updated independently while relevant information is retrieved for each query. [1], [2] However, retrieval does not automatically guarantee a correct response. If the retrieved context is irrelevant, incomplete, or does not contain sufficient evidence, the model may still generate unsupported information. Therefore, identifying when a question cannot be answered from the available evidence and appropriately refusing it is an important requirement for a reliable RAG system.
+\subsection{Retrieval-Augmented Generation}
+Retrieval-Augmented Generation (RAG) combines information retrieval with language generation by supplying an LLM with relevant external knowledge during inference. A typical RAG pipeline preprocesses a knowledge collection, divides the content into smaller chunks, converts the chunks into vector representations, and stores them for retrieval. When a query is received, it is embedded in the same vector space and compared with document embeddings to identify semantically relevant chunks. The retrieved context is then combined with the query to construct an augmented prompt for the language model. [1], [2]
+
+A major advantage of RAG is that the external knowledge source can be updated without retraining the underlying LLM. However, system performance depends on factors such as document preprocessing, chunking, embedding quality, retrieval relevance, retrieval depth, and the model's ability to use the supplied context. Research on retrieval optimization and efficiency further highlights the importance of retrieval quality in overall RAG performance. [8], [9]
+
+In this project, RAG is implemented to reduce unsupported responses in knowledge-intensive question answering. The system uses a local knowledge collection, semantic retrieval, explicit prompt grounding, and a refusal mechanism when the required information is not available in the retrieved context.
+\subsection{Recent Advances in Retrieval-Augmented Generation}
+Recent RAG research has extended beyond the basic retriever-generator architecture, focusing on retrieval quality, efficiency, multilingual retrieval, context selection, and evaluation. Weighted retrieval and improved ranking methods aim to prioritize highly relevant evidence and reduce the influence of noisy or weakly relevant passages. Efficient retrieval methods address the computational cost of searching increasingly large knowledge collections. [8], [9]
+
+RAG has also been extended to multilingual and cross-lingual settings using multilingual embeddings, query or document translation, and cross-lingual retrieval. [5] Evaluation has similarly become an important research area. Metrics such as BLEU and ROUGE measure similarity between generated and reference text but do not directly establish whether an answer is supported by retrieved evidence. Frameworks such as RAGAS, ARES, and RAGEval therefore consider factors including context relevance, answer relevance, faithfulness, and other dimensions of RAG performance. [6], [7], [10]
+
+These developments indicate that effective RAG depends on the interaction between retrieval, context construction, and generation. Consequently, evaluating hallucination reduction should consider not only whether the system answers supported questions correctly, but also whether it avoids generating unsupported responses when the required evidence is absent.
+\subsection{Research Gap and Motivation}
+Although existing research demonstrates the potential of RAG for improving factual grounding, its effectiveness depends strongly on the availability and quality of retrieved evidence. Poor chunking, irrelevant retrieval, insufficient context, or unsuitable retrieval depth can prevent the model from obtaining the information required to answer correctly. Furthermore, retrieval alone does not ensure that a model will refuse questions for which supporting evidence is unavailable.
+
+This project addresses this gap through a controlled end-to-end comparison of the same Gemma 3 4B language model with and without retrieval. The implemented RAG pipeline performs document preprocessing, semantic retrieval, context augmentation, and grounded response generation. Two retrieval depths, k = 5 and k = 10, are evaluated to examine whether additional retrieved context affects answerability and hallucination reduction.
+
+The evaluation uses both answerable and unanswerable questions and measures answer accuracy, hallucination rate, and refusal accuracy. This design allows the study to examine whether retrieval-based grounding reduces unsupported generation and whether increasing retrieval depth provides sufficient additional evidence to improve answer accuracy. The work does not propose a new retrieval algorithm or language model architecture; instead, it evaluates the effectiveness of an implemented retrieval-grounded pipeline under a controlled benchmark.
+\subsection{Objectives of the Proposed Work}
+The primary objective is to investigate whether RAG can reduce hallucinations in knowledge-intensive question answering while maintaining or improving answer accuracy.
+
+The specific objectives are:
+
+• To study LLM limitations, particularly hallucination and dependence on parametric knowledge.
+
+• To implement a complete RAG pipeline involving document preprocessing, chunking, embedding generation, vector storage, semantic retrieval, prompt augmentation, and response generation.
+
+• To generate document and query embeddings using all-MiniLM-L6-v2 through Sentence-Transformers.
+
+• To implement semantic retrieval using a project-specific VectorStore wrapper backed by FAISS IndexFlatL2 and evaluate retrieval depths of k = 5 and k = 10.
+
+• To constrain generation using retrieved evidence and implement refusal behavior when sufficient information is unavailable.
+
+• To compare the baseline Gemma 3 4B model without retrieval against both RAG configurations.
+
+• To evaluate answer accuracy, hallucination rate, and refusal accuracy using answerable and unanswerable questions.
+\subsection{Scope of the Project}
+This study focuses on RAG as a retrieval-based approach for reducing hallucinations in LLM-based question answering. The underlying language model is not modified through pre-training or fine-tuning. Instead, an external local knowledge collection is processed and retrieved during inference.
+
+The implemented system uses research-oriented documents in PDF format. The documents are divided into text chunks and converted into dense vector representations using all-MiniLM-L6-v2. These embeddings are managed using a project-specific VectorStore wrapper backed by FAISS IndexFlatL2. During inference, the user query is embedded, compared with indexed document embeddings, and used to retrieve the most relevant chunks. The retrieved context is supplied to Gemma 3 4B through Ollama using a prompt that restricts generation to the available evidence and instructs the model to refuse unsupported questions.
+
+The evaluation uses a fixed benchmark of 10 questions: five answerable and five unanswerable, comparing a baseline without retrieval against RAG configurations with k = 5 and k = 10. Therefore, the results demonstrate the behavior and feasibility of the implemented system on the evaluated benchmark rather than providing broad statistical generalization. Larger and more diverse datasets, additional retrieval strategies, embedding models, and language models can be investigated in future work.
+
+
+
+\section{Related Works}
+Recent research has explored Retrieval-Augmented Generation (RAG) from different perspectives, including system architecture, hallucination analysis, retrieval improvement, multilingual retrieval, efficiency, and evaluation.
+
+\textbf{RAG Surveys:} Arslana et al. [1] provide an overview of RAG architectures, retrieval mechanisms, vector databases, and their role in improving the factual reliability of LLMs. Fan et al. [2] further classify RAG approaches based on retrieval, knowledge integration, and application settings, while identifying challenges such as retrieval quality, scalability, latency, and factual consistency. These studies establish the foundation for using retrieval to supplement the static knowledge of LLMs.
+
+\textbf{Hallucination Analysis:} HalluLens [3] introduces a benchmark and taxonomy for analyzing hallucinations in LLMs, particularly by distinguishing different forms of unsupported generation. ChainPoll [4] proposes a structured approach for detecting hallucinations and improving the reliability of response evaluation. Both studies focus primarily on identifying and evaluating hallucinations rather than preventing them during generation.
+
+\textbf{Multilingual Retrieval:} Ranaldi et al. [5] investigate multilingual RAG using multilingual embeddings, cross-lingual retrieval, and document translation. Their results show that retrieval-based approaches can improve access to knowledge across languages, although translation quality and cross-lingual semantic alignment remain challenges. This work demonstrates the importance of retrieval quality when knowledge sources and queries vary in language.
+
+\textbf{RAG Evaluation:} RAGAS [6] proposes an automated framework for evaluating RAG systems using measures such as faithfulness, answer relevance, and context relevance. ARES [7] similarly evaluates context relevance, answer relevance, and faithfulness using automated evaluation models. RAGEval [10] extends this direction through a broader evaluation framework covering retrieval quality, factual correctness, faithfulness, completeness, relevance, and hallucination. These studies show that evaluating RAG requires more than conventional text-similarity measures such as BLEU and ROUGE.
+
+\textbf{Retrieval Efficiency and Quality:} Quinn et al. [8] investigate methods for accelerating RAG by improving indexing and retrieval efficiency while maintaining response quality. Gai et al. [9] propose weighted retrieval, where retrieved documents receive different importance based on their relevance and contextual value. These studies demonstrate that both retrieval efficiency and the quality of retrieved evidence can significantly influence RAG performance.
+
+\subsection{Research Gap}
+Existing studies demonstrate that RAG can improve the factual reliability of LLMs, but its effectiveness depends strongly on retrieval quality, available evidence, and the amount of context supplied to the model. Most existing works focus on improving a particular aspect, such as retrieval efficiency [8], document weighting [9], multilingual retrieval [5], hallucination detection [3], [4], or automated evaluation [6], [7], [10]. There is therefore a need for controlled end-to-end evaluation that directly compares an LLM with and without retrieval while considering both answerable and unanswerable questions.
+
+This project addresses this gap by implementing a complete RAG pipeline using the same Gemma 3 4B model in a baseline configuration without retrieval and RAG configurations with retrieval depths of k = 5 and k = 10. The evaluation measures answer accuracy, hallucination rate, and refusal accuracy, allowing the effect of retrieval and retrieval depth on both supported answering and refusal of unsupported questions to be examined.
+
+\section{METHODOLOGY}
+\subsection{Proposed System}
+The proposed system uses Retrieval-Augmented Generation (RAG) to reduce hallucinations in knowledge-intensive question answering. Instead of relying only on the language model's internal knowledge, the system retrieves relevant information from a local knowledge collection and provides it as context during generation. The implementation uses Python, Sentence-Transformers with all-MiniLM-L6-v2 for embedding generation, a project-specific VectorStore wrapper backed by FAISS IndexFlatL2 for storing and retrieving embeddings, and Gemma 3 4B through Ollama for response generation. The system evaluates both answer generation when sufficient evidence is available and refusal behaviour when the required information is absent, directly targeting unsupported generation and hallucination reduction.
+
+\subsection{Overall Architecture}
+The system consists of an offline knowledge-ingestion stage and an online query-processing stage. PDF knowledge documents are preprocessed and divided into chunks. Each chunk is converted into an embedding using all-MiniLM-L6-v2 and stored in the project-specific VectorStore wrapper backed by FAISS IndexFlatL2. At query time, the same embedding model converts the user query into a vector. Semantic retrieval selects the top-k relevant chunks, where k is evaluated at 5 and 10. The retrieved context is combined with the query and passed to the Gemma 3 4B model through a prompt that explicitly restricts the model to the supplied context.
+
+\begin{figure}[H]
+\centering
+\IfFileExists{Overall architecture.png}{\includegraphics[width=0.47\textwidth]{Overall architecture.png}}{\fbox{\parbox{0.45\textwidth}{Architecture figure file not bundled in this source copy. Restore the original figure before submission.}}}
+\caption{Proposed RAG system architecture with semantic retrieval and hallucination/refusal evaluation.}
+\label{fig:evolution_agile}
+\end{figure}
+
+\subsection{Workflow of the Proposed System}
+
+The implemented workflow is: (1) collect PDF knowledge documents; 
+(2) preprocess the text; (3) split the text into chunks; 
+(4) generate chunk embeddings; (5) store the embeddings in the custom 
+VectorStore; (6) receive a user query; (7) generate the query embedding; 
+(8) perform semantic similarity retrieval; (9) select the top-$k$ relevant 
+chunks; (10) combine the retrieved context with the query; 
+(11) construct the augmented prompt; (12) generate the answer with Gemma 3 4B; 
+and (13) evaluate the response for refusal behaviour and answer correctness.
+
+\begin{algorithm}[t]
+\caption{Retrieval-Augmented Generation Framework}
+\label{alg:rag_framework}
+\begin{algorithmic}[1]
+
+\Require $Q$ = user query; $D$ = indexed knowledge documents; 
+$k \in \{5,10\}$
+\Ensure $R$ = generated response
+
+\State Load the preprocessed knowledge embeddings from the project-specific VectorStore wrapper backed by FAISS IndexFlatL2.
+\State Receive user query $Q$.
+\State Generate the embedding vector for $Q$ using 
+all-MiniLM-L6-v2.
+\State Compute semantic similarity between $Q$ and stored 
+document-chunk embeddings.
+\State Retrieve the top-$k$ most relevant chunks.
+\State Combine the retrieved chunks with $Q$ to construct the augmented prompt.
+\State Generate response $R$ using Gemma 3 4B.
+\State Detect whether $R$ is a refusal.
+\State For answerable questions, evaluate correctness against the expected answer.
+\State For unanswerable questions, classify a non-refusal response as a hallucination.
+\State Aggregate answer accuracy, hallucination rate, and refusal accuracy.
+
+\State \Return $R$ and evaluation metrics.
+
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Document Collection and Preprocessing}
+The knowledge base consists of locally stored research-oriented documents in PDF format. Before indexing, the extracted text is cleaned and normalized to remove unnecessary formatting and textual artifacts. The processed text is then prepared for chunking and embedding generation.
+\subsection{Text Chunking}
+The preprocessed documents are divided into smaller text chunks to provide manageable semantic units for retrieval. Instead of comparing the query with entire documents, the retriever compares it with individual chunks, allowing more relevant portions of the knowledge base to be selected for generation.
+\subsection{Embedding Generation}
+Both document chunks and user queries are embedded using all-MiniLM-L6-v2 through Sentence-Transformers. Using the same embedding model for documents and queries places them in a common vector space, enabling semantic comparison rather than simple keyword matching.
+\subsection{Vector Store and Semantic Retrieval}
+A project-specific VectorStore wrapper backed by FAISS IndexFlatL2 is used to store and load document embeddings along with their corresponding chunk text. The project-specific VectorStore wrapper uses FAISS IndexFlatL2 for L2-distance search and stores chunk metadata separately in metadata.pkl; it does not use a hosted vector database. During inference, the query embedding is compared with stored chunk embeddings, and the most relevant chunks are retrieved using semantic similarity. Two retrieval depths, k = 5 and k = 10, are evaluated to study the effect of additional retrieved context.
+\subsection{Prompt Augmentation and Response Generation}
+The retrieved chunks are combined with the original query to construct the context supplied to Gemma 3 4B. The generation prompt explicitly instructs the model to use only the provided context, avoid relying on outside knowledge or inventing facts, and return a predefined refusal response when the available context is insufficient. This grounding constraint is central to the proposed hallucination-reduction approach.
+\subsection{Evaluation Methodology}
+The evaluation benchmark contains 10 questions, consisting of 5 answerable questions whose required information is present in the indexed documents and 5 unanswerable questions whose required information is absent. The same Gemma 3 4B model is evaluated under three configurations: baseline without retrieval, RAG with k = 5 and 10.
+
+The evaluation script detects refusal behaviour using predefined refusal phrases. For unanswerable questions, a refusal is counted as a correct refusal, while a non-refusal response is classified as a hallucination. For answerable questions, a refusal is considered a failed answer; otherwise, the generated response is compared with the expected answer.
+
+The evaluation metrics are defined as:
+
+Answer Accuracy = Correct Answers / Answerable Questions × 100
+
+Hallucination Rate = Hallucinated Responses / Unanswerable Questions × 100
+
+Refusal Accuracy = Correct Refusals / Unanswerable Questions × 100
+
+
+\section{EXPERIMENTS AND RESULTS}
+\subsection{Experimental Setup}
+The system was implemented and evaluated locally in Python using Gemma 3 4B through Ollama. The supplied implementation loads PDF files from the data directory, uses 700-character chunks with a 150-character overlap, embeds with all-MiniLM-L6-v2, and searches a FAISS IndexFlatL2 index using L2 distance. Generation uses temperature 0. Document and query embeddings were generated using all-MiniLM-L6-v2 with Sentence-Transformers, while the project-specific VectorStore wrapper backed by FAISS IndexFlatL2 and Retriever components handled indexed document chunks and semantic retrieval. A fixed benchmark of 10 questions, consisting of five answerable and five unanswerable questions, was used for evaluation.
+\subsection{Baseline and RAG Configuration}
+The baseline configuration uses Gemma 3 4B without retrieval, allowing the model to answer using only its internal knowledge. In the proposed RAG configuration, relevant document chunks are retrieved and provided as context before generation. Two retrieval depths, k = 5 and k = 10, were evaluated while keeping the remaining major components unchanged.
+\subsection{Evaluation Results}
+The results show a clear improvement after retrieval-based grounding. The baseline hallucinated on 4 of 5 unanswerable questions, resulting in an 80\% hallucination rate. Both RAG configurations reduced hallucinations to 0\% and correctly refused all unanswerable questions.
+
+\begin{table}[H]
+\centering
+\caption{Baseline and RAG performance on the 10-question evaluation set.}
+\label{tab:performance_comparison}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{lccc}
+\hline
+\textbf{Configuration} &
+\textbf{Answer Accuracy} &
+\textbf{Hallucination Rate} &
+\textbf{Refusal Accuracy} \\
+\hline
+Baseline (No Retrieval) & 60.00\% & 80.00\% & 20.00\% \\
+RAG ($k = 5$)           & 80.00\% & 0.00\%  & 100.00\% \\
+RAG ($k = 10$)          & 100.00\% & 0.00\% & 100.00\% \\
+\hline
+\end{tabular}%
+}
+\end{table}
+\begin{figure}[H]
+    \centering
+    \IfFileExists{Performance.png}{\includegraphics[width=1\linewidth]{Performance.png}}{\fbox{\parbox{0.9\linewidth}{Performance figure file not bundled in this source copy. Restore the original figure before submission.}}}
+    \caption{Performance comparison of baseline and RAG configurations}
+    \label{fig:placeholder}
+\end{figure}
+With k = 5, the system correctly answered 4 out of 5 answerable questions and refused all five unanswerable questions. Increasing retrieval depth to k = 10 enabled the system to correctly answer all five answerable questions while maintaining 0\% hallucination and 100\% refusal accuracy.
+
+\subsection{Baseline vs. RAG Comparison}
+Compared with the baseline, both RAG configurations completely eliminated hallucinations and improved refusal accuracy from 20\% to 100\%. Answer accuracy increased by 20 percentage points with k = 5 and by 40 percentage points with k = 10.
+\begin{table}[H]
+\centering
+\caption{Comparative improvement over the baseline.}
+\label{tab:comparative_improvement}
+
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{lccc}
+\hline
+\textbf{Metric} &
+\textbf{Baseline} &
+\textbf{RAG ($k=5$)} &
+\textbf{RAG ($k=10$)} \\
+\hline
+Answer Accuracy       & 60\% & 80\%    & 100\% \\
+Hallucination Rate    & 80\% & 0\%     & 0\%   \\
+Refusal Accuracy      & 20\% & 100\%   & 100\% \\
+Hallucination Reduction & -- & 100\%   & 100\% \\
+Accuracy Improvement  & --   & +20 pp  & +40 pp \\
+\hline
+\end{tabular}%
+}
+\end{table}
+
+\subsection{Effect of Retrieval Depth}
+Increasing the retrieval depth from k = 5 to k = 10 improved answer accuracy from 80\% to 100\% without affecting hallucination or refusal performance. While k = 5 already eliminated unsupported responses, one answerable question could not be answered because the retrieved context was insufficient. Providing additional context with k = 10 allowed the model to answer all five answerable questions correctly.
+\begin{figure}[H]
+    \centering
+    \IfFileExists{Retrieval.png}{\includegraphics[width=0.75\linewidth]{Retrieval.png}}{\fbox{\parbox{0.7\linewidth}{Retrieval figure file not bundled in this source copy. Restore the original figure before submission.}}}
+    \caption{Effect of retrieval depth on answer accuracy}
+    \label{fig:placeholder}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \IfFileExists{Matrix.png}{\includegraphics[width=1\linewidth]{Matrix.png}}{\fbox{\parbox{0.9\linewidth}{Confusion matrix figure file not bundled in this source copy. Restore the original figure before submission.}}}
+    \caption{Confusion matrices showing answer/refusal behaviour for baseline and RAG configurations}
+    \label{fig:placeholder}
+\end{figure}
+\subsection{Representative Evaluation Behaviour}
+The unanswerable questions included requests for information such as the capital of France, the population of Japan in 2026, the winner of the 2022 FIFA World Cup, the current stock price of Apple, and the weather in Chennai today. Since these facts were absent from the indexed knowledge, the expected behaviour was refusal rather than using external or internal knowledge. The RAG system correctly refused all five unanswerable questions for both retrieval settings.
+\subsection{Representative System Outputs}
+To demonstrate the behavior of the proposed RAG system, representative outputs were examined for both answerable and unanswerable queries. The system was evaluated using retrieval configurations with k=5 and k=10. For answerable queries, the system generated responses using the retrieved context, while for queries whose required information was absent from the documents, the system correctly refused to answer.
+
+1) RAG Output with k=5
+
+For k=5, the system retrieved the top five relevant document chunks and used them as context for response generation. An answerable query produced a context-grounded response, while an unanswerable query resulted in a correct refusal instead of unsupported information.
+\begin{figure}[H]
+    \centering
+    \IfFileExists{Fidure-1.png}{\includegraphics[width=1\linewidth]{Fidure-1.png}}{\fbox{\parbox{0.9\linewidth}{Example figure file not bundled in this source copy. Replace with a formatted example.}}}
+        \caption{Representative answerable query output using RAG with k=5}
+    \label{fig:placeholder}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \IfFileExists{Fidure-2.png}{\includegraphics[width=1\linewidth]{Fidure-2.png}}{\fbox{\parbox{0.9\linewidth}{Example figure file not bundled in this source copy. Replace with a formatted example.}}}
+    \caption{Representative refusal output using RAG with k=5}
+    \label{fig:placeholder}
+\end{figure}
+
+2) RAG Output with k=10
+
+For k=10, the system retrieved the top ten relevant document chunks before generating the response. The results show correct responses for answerable questions and appropriate refusals for questions that could not be supported by the available documents.
+
+\begin{figure}[H]
+    \centering
+    \IfFileExists{Fidure-3.png}{\includegraphics[width=1\linewidth]{Fidure-3.png}}{\fbox{\parbox{0.9\linewidth}{Example figure file not bundled in this source copy. Replace with a formatted example.}}}
+    \caption{Representative answerable query output using RAG with k=10}
+    \label{fig:placeholder}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \IfFileExists{Fidure-4.png}{\includegraphics[width=1\linewidth]{Fidure-4.png}}{\fbox{\parbox{0.9\linewidth}{Example figure file not bundled in this source copy. Replace with a formatted example.}}}
+    \caption{Representative refusal output using RAG with k=10}
+    \label{fig:placeholder}
+\end{figure}
+
+
+\subsection{Discussion}
+The results support the effectiveness of retrieval-based grounding for reducing unsupported responses on the evaluated benchmark. The baseline relied entirely on the model's internal knowledge and hallucinated on four of five unanswerable questions. In contrast, both RAG configurations produced 0\% hallucination and 100\% refusal accuracy. The k = 10 configuration achieved the best overall performance, with 100\% answer accuracy while maintaining the same refusal behaviour.
+
+However, these results should be interpreted within the scope of the evaluation. The benchmark contains only 10 questions, so the findings demonstrate system behaviour and feasibility rather than broad statistical generalization. Larger and more diverse datasets are required to validate the approach across different domains, query types, document collections, and retrieval conditions.
+
+
+\section{CONCLUSION}
+\subsection{Conclusion}
+The initial Retrieval-Augmented Generation (RAG) experiment showed a lower non-refusal rate on the five benchmark items labelled unanswerable. Because these items include general-knowledge questions and the baseline prompt differs from the RAG prompt, this outcome should not be interpreted as a clean estimate of hallucination reduction attributable to retrieval alone. The system combines document preprocessing, text chunking, all-MiniLM-L6-v2 embeddings, a project-specific VectorStore wrapper backed by FAISS IndexFlatL2, semantic retrieval, prompt augmentation, and Gemma 3 4B generation. A refusal mechanism was used to prevent the model from generating unsupported responses when the required information was absent from the retrieved context.
+
+The baseline Gemma 3 4B configuration achieved 60\% answer accuracy, an 80\% hallucination rate, and 20\% refusal accuracy. With RAG using \(k=5\), answer accuracy increased to 80\%, while the hallucination rate decreased to 0\% and refusal accuracy increased to 100\%. With \(k=10\), answer accuracy reached 100\%, while the hallucination rate remained at 0\% and refusal accuracy remained at 100\%. These values describe the initial 10-question run only. The observed difference is confounded by prompt differences and the small, weakly evidence-grounded unanswerable subset; it is not evidence that retrieval alone caused the full change.
+
+The pilot results are consistent with the hypothesis that context-restricted generation can encourage refusal when evidence is missing, but the current design cannot isolate the effect of retrieval from prompt instructions. However, the evaluation was limited to 10 questions, and therefore the findings should not be interpreted as broad statistical evidence. Larger and more diverse benchmarks are required to determine whether the observed performance generalizes across different domains, query types, document collections, and retrieval conditions.
+
+\subsection{Future Work}
+Future work will focus on expanding the evaluation benchmark and improving retrieval quality. Larger collections of answerable and unanswerable questions can provide more reliable estimates of hallucination behaviour. Additional retrieval settings, hybrid dense-sparse retrieval, reranking, adaptive chunking, and stronger embedding models can be investigated to determine how retrieval quality affects generation.
+
+The evaluation can also be extended using established RAG-specific metrics for faithfulness, context relevance, and answer relevance. Further experiments across multiple domains and larger document collections can be conducted to evaluate the robustness and generalizability of the proposed framework.
+
+
+
+
+
+\begin{thebibliography}{00}
+
+\bibitem{arslan2024rag}
+M. Arslan, H. Ghanem, S. Munawar, and C. Cruz,
+``A Survey on RAG with LLMs,''
+\textit{Procedia Computer Science}, vol. 246, pp. 3781--3790, 2024.
+
+\bibitem{fan2024rag}
+W. Fan, Y. Ding, L. Ning, S. Wang, H. Li, D. Yin, T.-S. Chua, and Q. Li,
+``A Survey on Retrieval-Augmented Generation for Large Language Models: A Survey,''
+in \textit{Proceedings of the 30th ACM SIGKDD Conference on Knowledge Discovery and Data Mining (KDD '24)}, Barcelona, Spain, 2024.
+
+\bibitem{bang2025hallulens}
+Y. Bang, Z. Ji, A. Schelten, A. Hartshorn, T. Fowler, C. Zhang, N. Cancedda, and P. Fung,
+``HalluLens: LLM Hallucination Benchmark,''
+in \textit{Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (ACL 2025)}, 2025.
+
+\bibitem{friel2023chainpoll}
+R. Friel and A. Sanyal,
+``ChainPoll: A High-Efficacy Method for LLM Hallucination Detection,''
+\textit{arXiv preprint arXiv:2310.18344}, 2023.
+
+\bibitem{ranaldi2026multilingual}
+L. Ranaldi, B. Haddow, and A. Birch,
+``Multilingual Retrieval-Augmented Generation for Knowledge-Intensive Question Answering Tasks,''
+in \textit{Findings of the Association for Computational Linguistics: EACL 2026}, pp. 697--716, 2026.
+
+\bibitem{es2024ragas}
+S. Es, J. James, L. Espinosa-Anke, and S. Schockaert,
+``RAGAS: Automated Evaluation of Retrieval-Augmented Generation,''
+in \textit{Proceedings of the 18th Conference of the European Chapter of the Association for Computational Linguistics: System Demonstrations (EACL 2024)}, pp. 150--158, 2024.
+
+\bibitem{saadfalcon2024ares}
+J. Saad-Falcon, O. Khattab, C. Potts, and M. Zaharia,
+``ARES: An Automated Evaluation Framework for Retrieval-Augmented Generation Systems,''
+in \textit{Proceedings of the 2024 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies (NAACL-HLT 2024)}, pp. 338--354, 2024.
+
+\bibitem{quinn2025accelerating}
+D. Quinn, M. Nouri, N. Patel, J. Salihu, A. Salemi, S. Lee, H. Zamani, and M. Alian,
+``Accelerating Retrieval-Augmented Generation,''
+in \textit{Proceedings of the 30th ACM International Conference on Architectural Support for Programming Languages and Operating Systems (ASPLOS '25)}, Rotterdam, The Netherlands, 2025.
+
+\bibitem{gai2024factual}
+Z. Gai, L. Tong, and Q. Ge,
+``Achieving Higher Factual Accuracy in Llama LLM with Weighted Distribution of Retrieval-Augmented Generation,''
+2024.
+
+\bibitem{zhu2025rageval}
+K. Zhu, Y. Luo, D. Xu, Y. Yan, Z. Liu, S. Yu, R. Wang, S. Wang, Y. Li, N. Zhang, X. Han, Z. Liu, and M. Sun,
+``RAGEval: Scenario-Specific RAG Evaluation Dataset Generation Framework,''
+in \textit{Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (ACL 2025)}, Vienna, Austria, pp. 8520--8544, 2025.
+
+\end{thebibliography}
+
+
+\end{document}

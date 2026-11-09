@@ -1,0 +1,33 @@
+{
+    "baseline": {
+        "total_questions": 10,
+        "answerable_questions": 5,
+        "unanswerable_questions": 5,
+        "correct_refusals": 1,
+        "hallucinations": 4,
+        "correct_answers": 3,
+        "incorrect_answers": 2,
+        "failed_answers": 0,
+        "answer_accuracy": 60.0,
+        "hallucination_rate": 80.0,
+        "refusal_accuracy": 20.0
+    },
+    "rag": {
+        "total_questions": 10,
+        "answerable_questions": 5,
+        "unanswerable_questions": 5,
+        "correct_refusals": 5,
+        "hallucinations": 0,
+        "correct_answers": 5,
+        "incorrect_answers": 0,
+        "failed_answers": 0,
+        "answer_accuracy": 100.0,
+        "hallucination_rate": 0.0,
+        "refusal_accuracy": 100.0
+    },
+    "improvement": {
+        "hallucination_reduction_percentage": 100.0,
+        "answer_accuracy_change": 40.0,
+        "refusal_accuracy_change": 80.0
+    }
+}

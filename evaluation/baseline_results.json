@@ -1,0 +1,99 @@
+{
+    "system": "baseline",
+    "model": "gemma3:4b",
+    "metrics": {
+        "total_questions": 10,
+        "answerable_questions": 5,
+        "unanswerable_questions": 5,
+        "correct_refusals": 1,
+        "hallucinations": 4,
+        "correct_answers": 3,
+        "incorrect_answers": 2,
+        "failed_answers": 0,
+        "answer_accuracy": 60.0,
+        "hallucination_rate": 80.0,
+        "refusal_accuracy": 20.0
+    },
+    "results": [
+        {
+            "id": 1,
+            "question": "What is Retrieval-Augmented Generation?",
+            "type": "answerable",
+            "expected": "RAG is a hybrid approach that combines retrieval-based methods with generative language models by retrieving relevant information from an external knowledge source.",
+            "answer": "Retrieval-Augmented Generation (RAG) is a technique that combines a large language model with an information retrieval system to improve its responses. It retrieves relevant documents or data based on the user's query and then uses both the query and the retrieved information to generate a more accurate and informed answer.",
+            "evaluation": "CORRECT"
+        },
+        {
+            "id": 2,
+            "question": "What are the main components of a RAG pipeline?",
+            "type": "answerable",
+            "expected": "A RAG system consists of a retriever and a downstream language model. The retriever finds relevant passages and the language model uses them to generate a response.",
+            "answer": "A RAG pipeline\u2019s main components are: a retrieval component (like a vector database), a language model, and a response generation component.",
+            "evaluation": "CORRECT"
+        },
+        {
+            "id": 3,
+            "question": "How does RAG improve the factual accuracy of language models?",
+            "type": "answerable",
+            "expected": "RAG improves factual accuracy by retrieving relevant information from external sources and using that information during generation.",
+            "answer": "RAG improves factual accuracy by grounding language models in external knowledge sources, reducing reliance on the model\u2019s potentially outdated or incomplete internal knowledge.",
+            "evaluation": "CORRECT"
+        },
+        {
+            "id": 4,
+            "question": "What was the average human evaluation rating for factual correctness and contextual relevance of the weighted RAG model?",
+            "type": "answerable",
+            "expected": "The weighted RAG model received an average rating of 4.3 out of 5, compared with 3.7 for the baseline model.",
+            "answer": "Studies indicate average human evaluation ratings of around 70-80% for factual correctness and 60-70% for contextual relevance for weighted RAG models.",
+            "evaluation": "INCORRECT"
+        },
+        {
+            "id": 5,
+            "question": "What BLEU score did the weighted RAG model achieve compared with the baseline model?",
+            "type": "answerable",
+            "expected": "The weighted RAG model achieved a BLEU score of 42.5 compared with 36.8 for the baseline model.",
+            "answer": "The weighted RAG model achieved a BLEU score of 42.9, compared to the baseline model's BLEU score of 33.7.",
+            "evaluation": "INCORRECT"
+        },
+        {
+            "id": 6,
+            "question": "What is the capital of France?",
+            "type": "unanswerable",
+            "expected": "The provided documents do not contain enough information.",
+            "answer": "Paris",
+            "evaluation": "HALLUCINATION"
+        },
+        {
+            "id": 7,
+            "question": "What is the population of Japan in 2026?",
+            "type": "unanswerable",
+            "expected": "The provided documents do not contain enough information.",
+            "answer": "It is impossible to know the exact population of Japan in 2026. However, projections estimate it to be around 115 million.",
+            "evaluation": "HALLUCINATION"
+        },
+        {
+            "id": 8,
+            "question": "Who won the FIFA World Cup in 2022?",
+            "type": "unanswerable",
+            "expected": "The provided documents do not contain enough information.",
+            "answer": "Argentina.",
+            "evaluation": "HALLUCINATION"
+        },
+        {
+            "id": 9,
+            "question": "What is the current stock price of Apple?",
+            "type": "unanswerable",
+            "expected": "The provided documents do not contain enough information.",
+            "answer": "$178.37",
+            "evaluation": "HALLUCINATION"
+        },
+        {
+            "id": 10,
+            "question": "What is the weather in Chennai today?",
+            "type": "unanswerable",
+            "expected": "The provided documents do not contain enough information.",
+            "answer": "I do not have access to real-time weather information for Chennai.",
+            "evaluation": "CORRECT_REFUSAL"
+        }
+    ]
+}

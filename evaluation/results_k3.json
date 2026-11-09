@@ -1,0 +1,97 @@
+{
+    "metrics": {
+        "total_questions": 10,
+        "answerable_questions": 5,
+        "unanswerable_questions": 5,
+        "correct_refusals": 4,
+        "hallucinations": 1,
+        "correct_answers": 5,
+        "incorrect_answers": 0,
+        "failed_answers": 0,
+        "answer_accuracy": 100.0,
+        "hallucination_rate": 20.0,
+        "refusal_accuracy": 80.0
+    },
+    "results": [
+        {
+            "id": 1,
+            "question": "What is Retrieval-Augmented Generation?",
+            "type": "answerable",
+            "expected": "RAG is a hybrid approach that combines retrieval-based methods with generative language models by retrieving relevant information from an external knowledge source.",
+            "answer": "Retrieval-Augmented Generation (RAG) is a hybrid approach that integrates the advantages of retrieval-based and generative models to enhance the factual accuracy of language model outputs. RAG functions by initially retrieving relevant documents from a large corpus based on the input query, and subsequently utilizing this retrieved information to guide the generation process. It is a powerful technique for enhancing the factual accuracy of language models by combining retrieval-based and generative approaches.",
+            "evaluation": "CORRECT"
+        },
+        {
+            "id": 2,
+            "question": "What are the main components of a RAG pipeline?",
+            "type": "answerable",
+            "expected": "A RAG system consists of a retriever and a downstream language model. The retriever finds relevant passages and the language model uses them to generate a response.",
+            "answer": "Typically, a RAG system consists of a retriever and a downstream language model (LM). Given a user question, the retriever finds relevant passages from a corpus and the LM uses these passages to generate a response.",
+            "evaluation": "CORRECT"
+        },
+        {
+            "id": 3,
+            "question": "How does RAG improve the factual accuracy of language models?",
+            "type": "answerable",
+            "expected": "RAG improves factual accuracy by retrieving relevant information from external sources and using that information during generation.",
+            "answer": "By addressing these areas, researchers can further optimize the performance of weighted RAG models, ensuring their reliability and effec- tiveness in an ever-expanding array of applications. The weighted RAG mechanism enhances the factual accuracy and overall performance of the Llama Large model. With RAGAS, we put forward a suite of metrics which can be used to evaluate these different dimensions without having to rely on ground truth human annotations. By employing this algorithm, RAG effectively grounds the generated content in relevant and reliable documents, which significantly enhances the factual accuracy and contextual relevance of the language model outputs.",
+            "evaluation": "CORRECT"
+        },
+        {
+            "id": 4,
+            "question": "What was the average human evaluation rating for factual correctness and contextual relevance of the weighted RAG model?",
+            "type": "answerable",
+            "expected": "The weighted RAG model received an average rating of 4.3 out of 5, compared with 3.7 for the baseline model.",
+            "answer": "The weighted RAG model received an average rating of 4.3 out of 5 for factual correctness and contextual relevance, compared to 3.7 for the baseline model.",
+            "evaluation": "CORRECT"
+        },
+        {
+            "id": 5,
+            "question": "What BLEU score did the weighted RAG model achieve compared with the baseline model?",
+            "type": "answerable",
+            "expected": "The weighted RAG model achieved a BLEU score of 42.5 compared with 36.8 for the baseline model.",
+            "answer": "The BLEU score for the weighted RAG model was 42.5, compared to 36.8 for the baseline model.",
+            "evaluation": "CORRECT"
+        },
+        {
+            "id": 6,
+            "question": "What is the capital of France?",
+            "type": "unanswerable",
+            "expected": "The provided documents do not contain enough information.",
+            "answer": "The provided documents do not contain enough information.",
+            "evaluation": "CORRECT_REFUSAL"
+        },
+        {
+            "id": 7,
+            "question": "What is the population of Japan in 2026?",
+            "type": "unanswerable",
+            "expected": "The provided documents do not contain enough information.",
+            "answer": "The provided documents do not contain enough information.",
+            "evaluation": "CORRECT_REFUSAL"
+        },
+        {
+            "id": 8,
+            "question": "Who won the FIFA World Cup in 2022?",
+            "type": "unanswerable",
+            "expected": "The provided documents do not contain enough information.",
+            "answer": "The provided documents do not contain enough information.",
+            "evaluation": "CORRECT_REFUSAL"
+        },
+        {
+            "id": 9,
+            "question": "What is the current stock price of Apple?",
+            "type": "unanswerable",
+            "expected": "The provided documents do not contain enough information.",
+            "answer": "The provided documents do not contain enough information.",
+            "evaluation": "CORRECT_REFUSAL"
+        },
+        {
+            "id": 10,
+            "question": "What is the weather in Chennai today?",
+            "type": "unanswerable",
+            "expected": "The provided documents do not contain enough information.",
+            "answer": "Okay, let's break down this information and address your request for a summary of the provided models and their performance.\n\n**Summary of Model Performance (Based on Provided Data)**\n\nThe table presents results from a series of large language models evaluated across several metrics related to text generation quality, hallucination reduction, and relevance. Here\u2019s a consolidated view:\n\n* **Key Models & Scores:**\n    * **MiniCPM-2B-sft:** A relatively small model (2 billion parameters) with moderate performance across the board.  It's noticeably weaker than the larger models in terms of BLEU and Rouge-L scores.\n    * **MiniCPM3-4B:** Shows improvement over MiniCPM-2B, but still lags behind many of the other models.\n    * **Baichuan-2-7B-chat:** A 7 billion parameter model offering a good balance between quality and size.  It demonstrates strong performance on some metrics (e.g., Rouge-L).\n    * **Qwen1.5-7B-chat & Qwen2-7B-Instruct:** These models show the strongest overall performance, particularly Qwen1.5-7B-chat which has high Rouge L and BLEU scores \n    * **Llama3-8B-Instruct:** Good performace with high rouge l (16.42) , showing improvements in instruction following . \n     * **Mistral-7B-Instruct-v0.3 & Mistral-Nemo-Instruct-2407**: Excellent results for both metrics, particularly Rouge L and the mixed entities metrics, which suggests a robust model.\n    * **Gemma-2-9b-it & Gemma-2-27b-it:** Gemma models show strong performance, especially with larger size (27B)\n\n * **Overall Trends:**\n   * **Hallucination Reduction:** Models like Mistral (especially the v0.3 version) and Llama 3 are consistently at the top in reducing hallucinations (lower hallucination scores).\n   * **Relevance & Quality:**  Higher BLEU and Rouge-L scores indicate better faithfulness to a reference text and overall quality of generated content.  The larger models generally perform best here. \n   * **Mixed Entities/Generated Entities**: The most robust model in this category is Mistral-7B-Instruct-v0.3, particularly good for the \"mixed entities\" metric\n\n**Key Observations:**\n\n* **Size Matters (to a Point):** Generally, larger models (more parameters) perform better on many of these metrics but have higher computational demands.\n* **Instruction Tuning is Crucial**: Models explicitly fine-tuned for instruction following (like Baichuan-2 and Llama3-8B-Instruct) often outperform general-purpose models.\n*  **Performance Metrics are Conflicting:** It's important to consider the combination of metrics. A model might be great at reducing hallucinations but not produce high-quality text (low BLEU/Rouge-L).\n\n---\n\n**Regarding the Other Information Provided:**\n\n* **Table 5 (False Acceptance Rates):** This table describes false acceptance rates for a Task 3 evaluation (\"NonExistentRefusal\") focusing on whether a model correctly rejects prompts that should be denied. It provides insights into how well models can avoid generating inappropriate responses, but doesn't directly relate to the original performance metrics.\n* **Table 6 (ARES Ranking):** This table appears to be an ARES ranking of various Pseudo-RAG systems, providing a comparison based on their accuracy and efficiency in answering questions.  This is separate from the model evaluation data presented initially.\n* **Appendix Material:** The appendix includes dataset selection processes and model completions, likely for detailed methodological information (not relevant for this summary).\n\n**In short: Based solely on the provided table, Qwen1.5-7B-chat and Mistral-7B-Instruct-v0.3 stand out as the most promising models across multiple generation quality metrics.**",
+            "evaluation": "HALLUCINATION"
+        }
+    ]
+}

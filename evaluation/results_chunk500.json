@@ -1,0 +1,97 @@
+{
+    "metrics": {
+        "total_questions": 10,
+        "answerable_questions": 5,
+        "unanswerable_questions": 5,
+        "correct_refusals": 5,
+        "hallucinations": 0,
+        "correct_answers": 4,
+        "incorrect_answers": 0,
+        "failed_answers": 1,
+        "answer_accuracy": 80.0,
+        "hallucination_rate": 0.0,
+        "refusal_accuracy": 100.0
+    },
+    "results": [
+        {
+            "id": 1,
+            "question": "What is Retrieval-Augmented Generation?",
+            "type": "answerable",
+            "expected": "RAG is a hybrid approach that combines retrieval-based methods with generative language models by retrieving relevant information from an external knowledge source.",
+            "answer": "Retrieval-Augmented Generation (RAG) is a hybrid approach that integrates the advantages of retrieval-based and generative models to enhance the factual accuracy of language model outputs. RAG functions by initially retrieving relevant documents D = {d1, d2, . . .} and further leveraging those in generation with an augmentation module.",
+            "evaluation": "CORRECT"
+        },
+        {
+            "id": 2,
+            "question": "What are the main components of a RAG pipeline?",
+            "type": "answerable",
+            "expected": "A RAG system consists of a retriever and a downstream language model. The retriever finds relevant passages and the language model uses them to generate a response.",
+            "answer": "The provided documents do not contain enough information.",
+            "evaluation": "FAILED_TO_ANSWER"
+        },
+        {
+            "id": 3,
+            "question": "How does RAG improve the factual accuracy of language models?",
+            "type": "answerable",
+            "expected": "RAG improves factual accuracy by retrieving relevant information from external sources and using that information during generation.",
+            "answer": "RAG enhances language models by augmenting them with relevant information retrieved from external databases, thereby grounding their outputs in factual data. It dynamically retrieves information during inference to reduce hallucinations and improve the quality of generated text.",
+            "evaluation": "CORRECT"
+        },
+        {
+            "id": 4,
+            "question": "What was the average human evaluation rating for factual correctness and contextual relevance of the weighted RAG model?",
+            "type": "answerable",
+            "expected": "The weighted RAG model received an average rating of 4.3 out of 5, compared with 3.7 for the baseline model.",
+            "answer": "4.3 out of 5",
+            "evaluation": "CORRECT"
+        },
+        {
+            "id": 5,
+            "question": "What BLEU score did the weighted RAG model achieve compared with the baseline model?",
+            "type": "answerable",
+            "expected": "The weighted RAG model achieved a BLEU score of 42.5 compared with 36.8 for the baseline model.",
+            "answer": "The weighted RAG model achieved a BLEU score of 42.5, compared to 36.8 for the baseline model.",
+            "evaluation": "CORRECT"
+        },
+        {
+            "id": 6,
+            "question": "What is the capital of France?",
+            "type": "unanswerable",
+            "expected": "The provided documents do not contain enough information.",
+            "answer": "The provided documents do not contain enough information.",
+            "evaluation": "CORRECT_REFUSAL"
+        },
+        {
+            "id": 7,
+            "question": "What is the population of Japan in 2026?",
+            "type": "unanswerable",
+            "expected": "The provided documents do not contain enough information.",
+            "answer": "The provided documents do not contain enough information.",
+            "evaluation": "CORRECT_REFUSAL"
+        },
+        {
+            "id": 8,
+            "question": "Who won the FIFA World Cup in 2022?",
+            "type": "unanswerable",
+            "expected": "The provided documents do not contain enough information.",
+            "answer": "The provided documents do not contain enough information.",
+            "evaluation": "CORRECT_REFUSAL"
+        },
+        {
+            "id": 9,
+            "question": "What is the current stock price of Apple?",
+            "type": "unanswerable",
+            "expected": "The provided documents do not contain enough information.",
+            "answer": "The provided documents do not contain enough information.",
+            "evaluation": "CORRECT_REFUSAL"
+        },
+        {
+            "id": 10,
+            "question": "What is the weather in Chennai today?",
+            "type": "unanswerable",
+            "expected": "The provided documents do not contain enough information.",
+            "answer": "The provided documents do not contain enough information.",
+            "evaluation": "CORRECT_REFUSAL"
+        }
+    ]
+}
