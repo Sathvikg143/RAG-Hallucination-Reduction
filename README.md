@@ -1,12 +1,12 @@
-\# Reducing LLM Hallucination in Knowledge-Intensive Tasks via Retrieval-Augmented Generation (RAG)
+﻿# Reducing LLM Hallucination in Knowledge-Intensive Tasks via Retrieval-Augmented Generation (RAG)
 
 
 
-\## 1. Project Overview
+## 1. Project Overview
 
 
 
-Large Language Models (LLMs) can generate incorrect or fabricated information when answering knowledge-intensive questions. This problem is commonly known as \*\*LLM hallucination\*\*.
+Large Language Models (LLMs) can generate incorrect or fabricated information when answering knowledge-intensive questions. This problem is commonly known as **LLM hallucination**.
 
 
 
@@ -18,7 +18,7 @@ The system combines semantic search, document retrieval, and context-grounded re
 
 
 
-\## 2. Objectives
+## 2. Objectives
 
 
 
@@ -34,7 +34,7 @@ The system combines semantic search, document retrieval, and context-grounded re
 
 
 
-\## 3. Technology Stack
+## 3. Technology Stack
 
 
 
@@ -60,7 +60,7 @@ The system combines semantic search, document retrieval, and context-grounded re
 
 
 
-\## 4. System Architecture
+## 4. System Architecture
 
 
 
@@ -68,25 +68,25 @@ The proposed system follows a Retrieval-Augmented Generation pipeline.
 
 
 
-1\. \*\*Document Loading:\*\* Research documents are loaded from PDF files.
+1\. **Document Loading:** Research documents are loaded from PDF files.
 
-2\. \*\*Text Extraction:\*\* Extracted document content is converted into machine-readable text.
+2\. **Text Extraction:** Extracted document content is converted into machine-readable text.
 
-3\. \*\*Text Chunking:\*\* Documents are divided into smaller chunks for efficient retrieval.
+3\. **Text Chunking:** Documents are divided into smaller chunks for efficient retrieval.
 
-4\. \*\*Embedding Generation:\*\* The BAAI/bge-small-en-v1.5 model converts text chunks into vector embeddings.
+4\. **Embedding Generation:** The BAAI/bge-small-en-v1.5 model converts text chunks into vector embeddings.
 
-5\. \*\*Vector Storage:\*\* Embeddings and associated metadata are stored for retrieval.
+5\. **Vector Storage:** Embeddings and associated metadata are stored for retrieval.
 
-6\. \*\*Semantic Retrieval:\*\* User queries are converted into embeddings and compared against stored document embeddings.
+6\. **Semantic Retrieval:** User queries are converted into embeddings and compared against stored document embeddings.
 
-7\. \*\*Context Construction:\*\* The most relevant retrieved chunks are selected based on the Top-K setting.
+7\. **Context Construction:** The most relevant retrieved chunks are selected based on the Top-K setting.
 
-8\. \*\*Response Generation:\*\* Gemma 3 4B generates responses using the retrieved context.
+8\. **Response Generation:** Gemma 3 4B generates responses using the retrieved context.
 
 
 
-\## 5. Project Structure
+## 5. Project Structure
 
 
 
@@ -94,71 +94,71 @@ The proposed system follows a Retrieval-Augmented Generation pipeline.
 
 RAG-Hallucination-Reduction/
 
-│
+â”‚
 
-├── data/
+â”œâ”€â”€ data/
 
-│   ├── RAG-1.pdf
+â”‚   â”œâ”€â”€ RAG-1.pdf
 
-│   ├── RAG-2.pdf
+â”‚   â”œâ”€â”€ RAG-2.pdf
 
-│   └── ...
+â”‚   â””â”€â”€ ...
 
-│
+â”‚
 
-├── evaluation/
+â”œâ”€â”€ evaluation/
 
-│   ├── evaluate.py
+â”‚   â”œâ”€â”€ evaluate.py
 
-│   ├── evaluate\_revision.py
+â”‚   â”œâ”€â”€ evaluate_revision.py
 
-│   ├── questions.json
+â”‚   â”œâ”€â”€ questions.json
 
-│   └── revision\_runs/
+â”‚   â””â”€â”€ revision_runs/
 
-│
+â”‚
 
-├── modules/
+â”œâ”€â”€ modules/
 
-│   ├── chunker.py
+â”‚   â”œâ”€â”€ chunker.py
 
-│   ├── embeddings.py
+â”‚   â”œâ”€â”€ embeddings.py
 
-│   ├── llm.py
+â”‚   â”œâ”€â”€ llm.py
 
-│   ├── pdf\_loader.py
+â”‚   â”œâ”€â”€ pdf_loader.py
 
-│   ├── retriever.py
+â”‚   â”œâ”€â”€ retriever.py
 
-│   └── vector\_store.py
+â”‚   â””â”€â”€ vector_store.py
 
-│
+â”‚
 
-├── vector\_db/
+â”œâ”€â”€ vector_db/
 
-│   ├── faiss.index
+â”‚   â”œâ”€â”€ faiss.index
 
-│   └── metadata.pkl
+â”‚   â””â”€â”€ metadata.pkl
 
-│
+â”‚
 
-├── app.py
+â”œâ”€â”€ app.py
 
-├── query.py
+â”œâ”€â”€ query.py
 
-├── requirements.txt
+â”œâ”€â”€ requirements.txt
 
-└── README.md
+â””â”€â”€ README.md
 
 ```
 
 
 
-\## 6. Installation and Setup
+## 6. Installation and Setup
 
 
 
-\### Prerequisites
+### Prerequisites
 
 
 
@@ -170,7 +170,7 @@ RAG-Hallucination-Reduction/
 
 
 
-\### Clone the Repository
+### Clone the Repository
 
 
 
@@ -184,7 +184,7 @@ cd RAG-Hallucination-Reduction
 
 
 
-\### Create a Virtual Environment
+### Create a Virtual Environment
 
 
 
@@ -200,7 +200,7 @@ Activate the environment:
 
 
 
-\*\*Windows:\*\*
+**Windows:**
 
 
 
@@ -212,7 +212,7 @@ venv\\Scripts\\activate
 
 
 
-\### Install Dependencies
+### Install Dependencies
 
 
 
@@ -224,7 +224,7 @@ pip install -r requirements.txt
 
 
 
-\### Set Up the Language Model
+### Set Up the Language Model
 
 
 
@@ -244,7 +244,7 @@ Ensure the Ollama service is running before executing the application.
 
 
 
-\## 7. Experimental Evaluation
+## 7. Experimental Evaluation
 
 
 
@@ -264,7 +264,7 @@ Three configurations were considered:
 
 
 
-\### Experimental Results
+### Experimental Results
 
 
 
@@ -280,11 +280,11 @@ Three configurations were considered:
 
 
 
-\*Note: Results are from the 10-question benchmark. They represent the observed experimental outcomes and should not be interpreted as universal performance guarantees.\*
+*Note: Results are from the 10-question benchmark. They represent the observed experimental outcomes and should not be interpreted as universal performance guarantees.*
 
 
 
-\### Key Observations
+### Key Observations
 
 
 
@@ -300,7 +300,7 @@ Three configurations were considered:
 
 
 
-\## 8. Conclusion
+## 8. Conclusion
 
 
 
@@ -320,7 +320,7 @@ Future work can explore larger benchmark datasets, different embedding models, a
 
 
 
-\## 9. Future Enhancements
+## 9. Future Enhancements
 
 
 
@@ -336,19 +336,20 @@ Future work can explore larger benchmark datasets, different embedding models, a
 
 
 
-\## 10. Author
+## 10. Author
 
 
 
-\*\*Sathvik Guptha\*\*
+**Sathvik Guptha**
 
 
 
-GitHub: \[Sathvikg143](https://github.com/Sathvikg143)
+GitHub: [Sathvikg143](https://github.com/Sathvikg143)
 
 
 
-Repository: \[RAG-Hallucination-Reduction](https://github.com/Sathvikg143/RAG-Hallucination-Reduction)
+Repository: [RAG-Hallucination-Reduction](https://github.com/Sathvikg143/RAG-Hallucination-Reduction)
+
 
 
 
